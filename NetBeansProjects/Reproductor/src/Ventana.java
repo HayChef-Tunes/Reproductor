@@ -143,7 +143,10 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * 
+ * @param evt 
+ */
     private void add_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_songActionPerformed
         JFileChooser dig = new JFileChooser();  //Crea un objeto de dialogo JFileChooser
         int option = dig.showOpenDialog(this);  // Abre la ventana en dialogo
@@ -152,7 +155,10 @@ public class Ventana extends javax.swing.JFrame {
             play_list.setText(file); //Muestra nombre del archivo         
         }
     }//GEN-LAST:event_add_songActionPerformed
-
+/**
+ * 
+ * @param evt 
+ */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
         String direccion = play_list.getText();
         if (contador ==0){
@@ -181,15 +187,24 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_playActionPerformed
-
+/**
+ * 
+ * @param evt 
+ */
     private void play_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play_listActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_play_listActionPerformed
-
+/**
+ * 
+ * @param evt 
+ */
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
 
     }//GEN-LAST:event_next_songActionPerformed
-
+/**
+ * 
+ * @param evt 
+ */
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         try {
             cancion.Stop();
