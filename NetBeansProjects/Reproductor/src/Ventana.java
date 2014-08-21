@@ -7,6 +7,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 // hola
 // que tal
 // todod bien
+// si bastante
 
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
