@@ -92,7 +92,7 @@ public class Ventana extends javax.swing.JFrame {
         Datos.setEditable(false);
         Datos.setBackground(new java.awt.Color(0, 0, 0));
         Datos.setColumns(20);
-        Datos.setFont(new java.awt.Font("Bradley Hand ITC", 1, 14)); // NOI18N
+        Datos.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         Datos.setForeground(new java.awt.Color(255, 255, 255));
         Datos.setRows(5);
         Datos.setCaretColor(new java.awt.Color(255, 255, 255));
