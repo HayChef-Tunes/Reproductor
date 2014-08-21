@@ -6,7 +6,9 @@ import java.io.File;
     */ 
 public class Reproductor {
 public BasicPlayer player;
-    
+    /**
+     * Constructor de la clase reproductor
+     */
 public Reproductor(){
 player = new BasicPlayer();
 }
@@ -30,6 +32,9 @@ player.resume();
 public void Stop() throws Exception {
 player.stop();
 }
-
-   // public static void main(String args[]){}
+    /**
+     * Main de la clase reproductor
+     * @param args 
+     */
+   public static void main(String args[]){}
     }

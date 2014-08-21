@@ -12,6 +12,9 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
     
+    /**
+     * Constructor de la clase
+     */
     public Ventana() {
         cancion = new Reproductor();
         initComponents();
@@ -195,7 +198,11 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_stopActionPerformed
-
+    
+    /**
+     * Main de la clase Ventana
+     * @param args 
+     */
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -220,7 +227,10 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    /**
+     * Se declaran las variables
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
