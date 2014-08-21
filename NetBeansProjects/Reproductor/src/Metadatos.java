@@ -15,29 +15,10 @@ import org.jaudiotagger.audio.AudioFileIO;
 public class Metadatos {
     String nl = System.getProperty("line.separator");
 
-    /**
-     *
-     */
     public String Titulo;
-
-    /**
-     *
-     */
     public String Album;
-
-    /**
-     *
-     */
     public String Artista;
-
-    /**
-     *
-     */
     public String Año;
-
-    /**
-     *
-     */
     public String Duración;
 
     /**
@@ -64,6 +45,7 @@ public class Metadatos {
             Artista="Artista: "+tag.getArtist();
             Año="Año: "+tag.getYear();
             Duración="Duración: "+duration+"s";
+      
                 } catch (IOException ex) {
                 Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (TagException ex) {
@@ -71,6 +53,8 @@ public class Metadatos {
         }
             return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
     }
+    
+    
     
     /**
      *
