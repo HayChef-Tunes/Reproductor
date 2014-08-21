@@ -12,6 +12,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
     Metadatos informacion = null;
+    public String Ruta;
     
     /**
      * Constructor de la clase
@@ -33,7 +34,6 @@ public class Ventana extends javax.swing.JFrame {
         next_song = new javax.swing.JButton();
         add_song = new javax.swing.JButton();
         delete_song = new javax.swing.JButton();
-        play_list = new javax.swing.JTextField();
         label_play_list = new javax.swing.JLabel();
         stop = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -68,13 +68,6 @@ public class Ventana extends javax.swing.JFrame {
 
         delete_song.setText("-");
 
-        play_list.setEditable(false);
-        play_list.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                play_listActionPerformed(evt);
-            }
-        });
-
         label_play_list.setFont(new java.awt.Font("Nimbus Sans L", 0, 18)); // NOI18N
         label_play_list.setForeground(new java.awt.Color(1, 1, 1));
         label_play_list.setText("Play List");
@@ -91,8 +84,13 @@ public class Ventana extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif"))); // NOI18N
         jLabel2.setText("jLabel2");
 
+        Datos.setEditable(false);
+        Datos.setBackground(new java.awt.Color(0, 0, 0));
         Datos.setColumns(20);
+        Datos.setFont(new java.awt.Font("Bradley Hand ITC", 1, 14)); // NOI18N
+        Datos.setForeground(new java.awt.Color(255, 255, 255));
         Datos.setRows(5);
+        Datos.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(Datos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,13 +120,9 @@ public class Ventana extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(play_list, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,13 +141,11 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(next_song)
                             .addComponent(add_song)
                             .addComponent(delete_song))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(play_list, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -167,9 +159,10 @@ public class Ventana extends javax.swing.JFrame {
         int option = dig.showOpenDialog(this);  // Abre la ventana en dialogo
         if (option == JFileChooser.APPROVE_OPTION){
             String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
-            play_list.setText(file); //Muestra nombre del archivo 
+            //Muestra nombre del archivo 
             String datos=informacion.datos(file);
             Datos.setText(datos);
+            Ruta=file; 
         }
     }//GEN-LAST:event_add_songActionPerformed
 /**
@@ -177,7 +170,7 @@ public class Ventana extends javax.swing.JFrame {
  * @param evt 
  */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
-        String direccion = play_list.getText();
+        String direccion = Ruta;
         if (contador ==0){
             try {
                 cancion.AbrirFichero(direccion);
@@ -204,13 +197,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_playActionPerformed
-/**
- * 
- * @param evt 
- */
-    private void play_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_play_listActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_play_listActionPerformed
+
 /**
  * 
  * @param evt 
@@ -273,7 +260,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel label_play_list;
     private javax.swing.JButton next_song;
     private javax.swing.JButton play;
-    private javax.swing.JTextField play_list;
     private javax.swing.JButton previous_song;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
