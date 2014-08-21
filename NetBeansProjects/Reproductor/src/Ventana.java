@@ -11,12 +11,14 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
+    Metadatos informacion = null;
     
     /**
      * Constructor de la clase
      */
     public Ventana() {
         cancion = new Reproductor();
+        informacion = new Metadatos();
         initComponents();
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(13,188,16));
@@ -152,7 +154,8 @@ public class Ventana extends javax.swing.JFrame {
         int option = dig.showOpenDialog(this);  // Abre la ventana en dialogo
         if (option == JFileChooser.APPROVE_OPTION){
             String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
-            play_list.setText(file); //Muestra nombre del archivo         
+            play_list.setText(file); //Muestra nombre del archivo 
+            informacion.datos(file);
         }
     }//GEN-LAST:event_add_songActionPerformed
 /**
