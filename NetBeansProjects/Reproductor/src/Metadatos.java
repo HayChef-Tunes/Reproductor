@@ -51,6 +51,7 @@ public class Metadatos {
                 } catch (TagException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
             return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
     }
     
