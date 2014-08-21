@@ -5,7 +5,11 @@ import java.io.File;
     * @author mell
     */ 
 public class Reproductor {
-public BasicPlayer player;
+
+    /**
+     *Varible
+     */
+    public BasicPlayer player;
     /**
      * Constructor de la clase reproductor
      */

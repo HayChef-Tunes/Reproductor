@@ -258,5 +258,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton previous_song;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
-    public int contador = 0;
+
+    /**
+     *
+     */
+        public int contador = 0;
 }
