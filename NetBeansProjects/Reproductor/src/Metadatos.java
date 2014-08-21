@@ -8,13 +8,43 @@ import org.farng.mp3.id3.ID3v1;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 
+/**
+ *
+ * @author javier2
+ */
 public class Metadatos {
     String nl = System.getProperty("line.separator");
+
+    /**
+     *
+     */
     public String Titulo;
+
+    /**
+     *
+     */
     public String Album;
+
+    /**
+     *
+     */
     public String Artista;
+
+    /**
+     *
+     */
     public String Año;
+
+    /**
+     *
+     */
     public String Duración;
+
+    /**
+     *
+     * @param ruta
+     * @return
+     */
     public String datos (String ruta){
             try {
                     File sourceFile = new File(ruta);
@@ -42,6 +72,12 @@ public class Metadatos {
             return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
     }
     
+    /**
+     *
+     * @param args
+     * @throws IOException
+     * @throws TagException
+     */
     public static void main(String[] args) throws IOException, TagException {
 	}
 }
