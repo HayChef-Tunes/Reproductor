@@ -1,6 +1,9 @@
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import java.io.File;
-    
+   /**
+    * Clase Reproductor
+    * @author mell
+    */ 
 public class Reproductor {
 public BasicPlayer player;
     
