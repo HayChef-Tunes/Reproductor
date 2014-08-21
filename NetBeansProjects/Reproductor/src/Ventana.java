@@ -3,7 +3,6 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-//Chef
 
 /**
  * Clase Ventana se crea la interfaz del proyecto
