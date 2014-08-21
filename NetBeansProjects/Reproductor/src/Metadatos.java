@@ -10,7 +10,11 @@ import org.jaudiotagger.audio.AudioFileIO;
 
 public class Metadatos {
     String nl = System.getProperty("line.separator");
-    public String Datos;
+    public String Titulo;
+    public String Album;
+    public String Artista;
+    public String Año;
+    public String Duración;
     public String datos (String ruta){
             try {
                     File sourceFile = new File(ruta);
@@ -25,15 +29,17 @@ public class Metadatos {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Datos=("Album: "+tag.getAlbum()+nl+"Titulo: "+tag.getTitle()+nl+
-                    "Artista: "+tag.getArtist()+nl+"Ano: "+tag.getYear()+nl+
-                    "Duracion: "+duration+"s");
+            Titulo="Titulo: "+tag.getTitle();
+            Album="Album: "+tag.getAlbum();
+            Artista="Artista: "+tag.getArtist();
+            Año="Año: "+tag.getYear();
+            Duración="Duración: "+duration+"s";
                 } catch (IOException ex) {
                 Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (TagException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return Datos;
+            return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
     }
     
     public static void main(String[] args) throws IOException, TagException {
