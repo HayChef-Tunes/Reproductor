@@ -4,6 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 // Ejemplo
+// hola
 
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
