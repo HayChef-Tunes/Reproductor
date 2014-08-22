@@ -43,7 +43,7 @@ public class ImageProcessing_TransformFormatImages{
       * @param icon Icon is going to be transformed
       * @return returns an Image from a Icon
       */
-    public Image iconToImage(Icon icon) {
+    public Image iconToImage(Icon icon) { 
           if (icon instanceof ImageIcon) {
               return ((ImageIcon)icon).getImage();
           } else {
@@ -97,5 +97,8 @@ public class ImageProcessing_TransformFormatImages{
         Icon iconReturn=(Icon)imageIcon;
         return iconReturn;
     }
- 
+    
+    public static void main (String [] args) {
+              
+    }
 }
