@@ -27,19 +27,22 @@ public class Metadatos {
      * @return
      */
     public String datos (String ruta){
+        
             try {
-                    File sourceFile = new File(ruta);
-            MP3File mp3file = new MP3File(sourceFile);
-            ID3v1 tag = mp3file.getID3v1Tag();
-            
-            int duration = 0;
+                File sourceFile = new File(ruta);
+                MP3File mp3file = new MP3File(sourceFile);
+                ID3v1 tag = mp3file.getID3v1Tag();
+                int duration = 0;
+                
             try {
                 AudioFile audioFile;
                 audioFile = AudioFileIO.read(new File(ruta));
                 duration = audioFile.getAudioHeader().getTrackLength();
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
             Titulo="Titulo: "+tag.getTitle();
             Album="Album: "+tag.getAlbum();
             Artista="Artista: "+tag.getArtist();
@@ -51,6 +54,7 @@ public class Metadatos {
                 } catch (TagException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
             return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
     }
     
