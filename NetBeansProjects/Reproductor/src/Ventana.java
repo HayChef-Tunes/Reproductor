@@ -197,31 +197,40 @@ public class Ventana extends javax.swing.JFrame {
  */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
         String direccion = Ruta;
-        if (contador ==0){
-            try {
-                cancion.AbrirFichero(direccion);
-                cancion.Play();
-                contador=1;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+        try {
+            if (modelo.getSize()>0){
+                if (contador ==0){
+                    try {
+                        cancion.AbrirFichero(direccion);
+                        cancion.Play();
+                        contador=1;
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+                    }
+                }
+
+                else if (contador ==1){
+                    try {
+                        cancion.Pausa();
+                        contador=2;
+                    } catch (Exception ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else {
+                    try {
+                        cancion.Continuar();
+                        contador = 1;
+                    } catch (Exception ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-}
-        else if (contador ==1){
-            try {
-                cancion.Pausa();
-                contador=2;
-            } catch (Exception ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            try {
-                cancion.Continuar();
-                contador = 1;
-            } catch (Exception ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } catch (Exception ex) {
+                    JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+                }
+    
+        
     }//GEN-LAST:event_playActionPerformed
 
 /**
