@@ -248,6 +248,11 @@ public class Ventana extends javax.swing.JFrame {
 
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
         // TODO add your handling code here:
+        if (modelo.getSize()>0){
+            int n = jList1.getSelectedIndex();
+            modelo.removeElementAt(n);
+            jList1.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_delete_songActionPerformed
     
     /**
