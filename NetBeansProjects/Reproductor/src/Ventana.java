@@ -200,7 +200,6 @@ public class Ventana extends javax.swing.JFrame {
                 String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
                 //Muestra nombre del archivo
                 String datos=informacion.datos(file);
-                //Datos.setText(datos);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
                 jList1.setSelectedIndex(indice);
