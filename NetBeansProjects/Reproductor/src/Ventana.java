@@ -19,6 +19,7 @@ public class Ventana extends javax.swing.JFrame {
     Metadatos informacion = null;
     ArrayList LISTA = null;
     public String Ruta;
+    public int indice = 0;
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
     
     /**
@@ -205,7 +206,7 @@ public class Ventana extends javax.swing.JFrame {
                 Datos.setText(datos);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
-                jList1.setSelectedIndex(0);
+                jList1.setSelectedIndex(indice++);
                 LISTA.add(informacion);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -284,15 +285,19 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_stopActionPerformed
 
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
-        // TODO add your handling code here:
-        if (modelo.getSize()>0){
-            int n = jList1.getSelectedIndex();
-            modelo.removeElementAt(n);
-            jList1.setSelectedIndex(0);
+        try {
+            cancion.Stop();
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (modelo.getSize() == 0){
-            Datos.setText("");            
-        }
+            if (modelo.getSize()>0){
+                int n = jList1.getSelectedIndex();
+                modelo.removeElementAt(n);
+                jList1.setSelectedIndex(0);
+            }
+            if (modelo.getSize() >= 0){
+               Datos.setText("");            
+            }
     }//GEN-LAST:event_delete_songActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
