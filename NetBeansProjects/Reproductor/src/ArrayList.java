@@ -2,16 +2,16 @@ class ArrayList {
 
 	private int size;
 	private int maxSize;
-	private Metadatos[] arreglo;
+	private String[] arreglo;
 	private final int MAX_SIZE = 777;
 
-	private ArrayList () {
+	ArrayList () {
 		this.size = 0;
 		this.maxSize = MAX_SIZE;
-		this.arreglo = new Metadatos[this.maxSize];
+		this.arreglo = new String[this.maxSize];
 	}
 
-	public void add (Metadatos e) {
+	public void add (String e) {
 		if (this.size < this.maxSize) {
 			this.arreglo [this.size] = e;
 			this.size ++;
@@ -31,7 +31,7 @@ class ArrayList {
 		}
 	}
 	
-	public Metadatos getElemento (int indice) throws Exception {
+	public String getElemento (int indice) throws Exception {
 		if (indice >= this.size){
 			throw new Exception();
 
@@ -41,7 +41,7 @@ class ArrayList {
 		}
 	}
 
-	public String find (Metadatos e) {
+	public String find (String e) {
 		for (int i=0; i < this.size; i++) {
 			if (e == arreglo[i]) {
 				return "FIND";
@@ -50,7 +50,7 @@ class ArrayList {
 		return "";
 	}
 
-	public void delete (Metadatos e) {
+	public void delete (String e) {
 		for (int i=0; i < this.size; i++) {
 			if (e == arreglo[i]) {
 				int c =i;

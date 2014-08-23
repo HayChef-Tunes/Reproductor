@@ -28,6 +28,7 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         cancion = new Reproductor();
         informacion = new Metadatos();
+        LISTA = new ArrayList();
         initComponents();
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(12,20,16));
@@ -206,8 +207,9 @@ public class Ventana extends javax.swing.JFrame {
                 Datos.setText(datos);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
-                jList1.setSelectedIndex(indice++);
-                LISTA.add(informacion);
+                jList1.setSelectedIndex(indice);
+                indice++;
+                LISTA.add(file);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -220,18 +222,21 @@ public class Ventana extends javax.swing.JFrame {
  */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
 
-    String direccion = Ruta;
+    //String direccion = Ruta;
+    int i = jList1.getSelectedIndex();
+    String elemento;
             if (modelo.getSize()>0){
                 if (contador ==0){
                     try {
-                        cancion.AbrirFichero(direccion);
+                         elemento = LISTA.getElemento(i);
+                        cancion.AbrirFichero(elemento);
                         cancion.Play();
                         if (informacion.getRutaImagen()==null){
                             jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
                         }
                         contador=1;
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
                     }
                 }
 
@@ -266,7 +271,21 @@ public class Ventana extends javax.swing.JFrame {
  * @param evt 
  */
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
-
+        try {
+            cancion.Stop();
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int n = jList1.getSelectedIndex();
+        String archivo;
+        try {
+            archivo = LISTA.getElemento(n);
+            cancion.AbrirFichero(archivo);
+            cancion.Play();
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_next_songActionPerformed
 /**
  * 
@@ -293,7 +312,7 @@ public class Ventana extends javax.swing.JFrame {
             if (modelo.getSize()>0){
                 int n = jList1.getSelectedIndex();
                 modelo.removeElementAt(n);
-                jList1.setSelectedIndex(0);
+                jList1.setSelectedIndex(--indice);
             }
             if (modelo.getSize() >= 0){
                Datos.setText("");            
