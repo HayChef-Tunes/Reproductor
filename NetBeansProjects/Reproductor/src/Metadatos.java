@@ -1,3 +1,5 @@
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.IOException;
@@ -32,7 +34,7 @@ public class Metadatos {
      * @param ruta
      * @return
      */
-    public String datos (String ruta){
+    public String datos (String ruta) throws Exception{
         try {
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
@@ -53,10 +55,16 @@ public class Metadatos {
             BufferedImage imageBuffer = ImageIO.read(entradadatos); 
             int ancho = imageBuffer.getWidth();
             int alto = imageBuffer.getHeight();
-            File imagen=new File(ruta+".jpg");
-            ImageIO.write(imageBuffer,"jpg",imagen);
-            ImagenRuta = (ruta+".jpg");
+            BufferedImage dest = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB);
             
+            Graphics2D g = dest.createGraphics();
+            AffineTransform at = AffineTransform.getScaleInstance((double)250 / ancho, (double)250 / alto);
+            g.drawRenderedImage(imageBuffer, at);
+            
+            File imagen=new File(ruta+".jpg");
+            ImageIO.write(dest,"JPG",imagen);
+            ImagenRuta = (ruta+".jpg");
+                        
         }    
          else {
             ImagenRuta = null;
@@ -80,5 +88,5 @@ public class Metadatos {
         return ImagenRuta;
     
     }
-    
+       
 }
