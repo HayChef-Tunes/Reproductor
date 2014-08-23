@@ -200,15 +200,6 @@ public class Ventana extends javax.swing.JFrame {
                 String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
                 //Muestra nombre del archivo
                 String datos=informacion.datos(file);
-                if (informacion.getRutaImagen()!=null){
-                    RutaImagen=informacion.getRutaImagen();
-                    ImageIcon imagen =new ImageIcon(RutaImagen);
-                    jLabel2.setIcon(imagen);
-                    imagen = null;
-                }
-                else{
-                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
-                }
                 Datos.setText(datos);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
@@ -235,10 +226,8 @@ public class Ventana extends javax.swing.JFrame {
                     try {
                          elemento = LISTA.getElemento(i);
                         cancion.AbrirFichero(elemento);
+                        imagenlabel();
                         cancion.Play();
-                        if (informacion.getRutaImagen()==null){
-                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
-                        }
                         contador=1;
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
@@ -248,9 +237,7 @@ public class Ventana extends javax.swing.JFrame {
                 else if (contador ==1){
                     try {
                         cancion.Pausa();
-                        if (informacion.getRutaImagen()==null){
-                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
-                        }
+                        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
                         contador=2;
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,9 +246,7 @@ public class Ventana extends javax.swing.JFrame {
                 else {
                     try {
                         cancion.Continuar();
-                        if (informacion.getRutaImagen()==null){
-                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
-                        }
+                        imagenlabel();
                         contador = 1;
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,6 +263,7 @@ public class Ventana extends javax.swing.JFrame {
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
         try {
                 cancion.Stop();
+                cancion = null;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -286,9 +272,10 @@ public class Ventana extends javax.swing.JFrame {
         try {
             jList1.setSelectedIndex(n+1);
             archivo = LISTA.getElemento(n+1);
+            cancion = new Reproductor();
             cancion.AbrirFichero(archivo);
+            imagenlabel();
             cancion.Play();
-            ;
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -301,9 +288,7 @@ public class Ventana extends javax.swing.JFrame {
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         try {
             cancion.Stop();
-            if (informacion.getRutaImagen()==null){
-                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
-                }
+            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
             contador = 0;
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -341,6 +326,7 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
           try {
                 cancion.Stop();
+                cancion = null;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -349,9 +335,10 @@ public class Ventana extends javax.swing.JFrame {
         try {
             jList1.setSelectedIndex(n-1);
             archivo = LISTA.getElemento(n-1);
+            cancion = new Reproductor();
             cancion.AbrirFichero(archivo);
+            imagenlabel();
             cancion.Play();
-            ;
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -411,5 +398,20 @@ public class Ventana extends javax.swing.JFrame {
 
     private String String(String Titulo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void imagenlabel(){
+        if (informacion.getRutaImagen()!=null){
+            RutaImagen=informacion.getRutaImagen();
+            ImageIcon imagen =new ImageIcon(RutaImagen);
+            jLabel2.setIcon(imagen);
+            imagen = null;
+        }
+        else if (informacion.getRutaImagen()==null){
+            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+        }
+        else{
+            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+        }
     }
 }
