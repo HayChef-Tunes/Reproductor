@@ -1,5 +1,8 @@
-class ArrayList {
 
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
+class ArrayList {
 	private int size;
 	private int maxSize;
 	private String[] arreglo;
@@ -32,13 +35,18 @@ class ArrayList {
 	}
 	
 	public String getElemento (int indice) throws Exception {
+                if (indice == -1){
+			JOptionPane.showMessageDialog (null,"Es la primera canción","Error",ERROR_MESSAGE);
+
+		}
 		if (indice >= this.size){
-			throw new Exception();
+			JOptionPane.showMessageDialog (null," Agregue otra canción para reproducir","Error",ERROR_MESSAGE);
 
 		}
 		else {
 			return this.arreglo [indice];
 		}
+            return null;
 	}
 
 	public String find (String e) {
@@ -49,6 +57,10 @@ class ArrayList {
 		}
 		return "";
 	}
+        
+        public void Clear(){
+            this.size = 0;
+        }
 
 	public void delete (String e) {
 		for (int i=0; i < this.size; i++) {
