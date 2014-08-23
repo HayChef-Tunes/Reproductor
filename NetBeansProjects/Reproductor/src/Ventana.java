@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.DefaultListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -45,6 +46,7 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         Datos = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
+        modelo = new DefaultListModel();
         jList1 = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +75,11 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         delete_song.setText("-");
+        delete_song.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_songActionPerformed(evt);
+            }
+        });
 
         stop.setText("█");
         stop.addActionListener(new java.awt.event.ActionListener() {
@@ -94,11 +101,7 @@ public class Ventana extends javax.swing.JFrame {
         Datos.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(Datos);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(modelo);
         jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,7 +183,12 @@ public class Ventana extends javax.swing.JFrame {
                 jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
             }
             Datos.setText(datos);
-            Ruta=file; 
+            Ruta=file;
+            modelo.addElement(informacion.Titulo);
+            //txtname.setText("");
+            //txtname.requestFocus();
+            jList1.setSelectedIndex(0);
+            
         }
     }//GEN-LAST:event_add_songActionPerformed
 /**
@@ -235,6 +243,10 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_stopActionPerformed
+
+    private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delete_songActionPerformed
     
     /**
      * Main de la clase Ventana
@@ -275,6 +287,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
+    private DefaultListModel modelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton next_song;
