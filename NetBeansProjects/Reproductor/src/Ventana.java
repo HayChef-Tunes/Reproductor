@@ -272,16 +272,18 @@ public class Ventana extends javax.swing.JFrame {
  */
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
         try {
-            cancion.Stop();
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int n = jList1.getSelectedIndex();
-        String archivo;
+                cancion.Stop();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int n = jList1.getSelectedIndex();
+            String archivo;
         try {
-            archivo = LISTA.getElemento(n);
+            jList1.setSelectedIndex(n+1);
+            archivo = LISTA.getElemento(n+1);
             cancion.AbrirFichero(archivo);
             cancion.Play();
+            ;
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -320,9 +322,14 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_delete_songActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Datos.setText("");
-        modelo.removeAllElements();
+        try {
+            // TODO add your handling code here:
+            cancion.Stop();
+            Datos.setText("");
+            modelo.removeAllElements();
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
