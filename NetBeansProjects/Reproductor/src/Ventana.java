@@ -200,7 +200,7 @@ public class Ventana extends javax.swing.JFrame {
                 String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
                 //Muestra nombre del archivo
                 String datos=informacion.datos(file);
-                Datos.setText(datos);
+                //Datos.setText(datos);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
                 jList1.setSelectedIndex(indice);
@@ -221,10 +221,13 @@ public class Ventana extends javax.swing.JFrame {
     //String direccion = Ruta;
     int i = jList1.getSelectedIndex();
     String elemento;
+    
             if (modelo.getSize()>0){
                 if (contador ==0){
                     try {
-                         elemento = LISTA.getElemento(i);
+                        elemento = LISTA.getElemento(i);
+                        String datos=informacion.datos(elemento);
+                        Datos.setText(datos);
                         cancion.AbrirFichero(elemento);
                         imagenlabel();
                         cancion.Play();
@@ -270,9 +273,11 @@ public class Ventana extends javax.swing.JFrame {
             int n = jList1.getSelectedIndex();
             String archivo;
         try {
+            
             jList1.setSelectedIndex(n+1);
             archivo = LISTA.getElemento(n+1);
             cancion = new Reproductor();
+            
             cancion.AbrirFichero(archivo);
             imagenlabel();
             cancion.Play();
