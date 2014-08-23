@@ -199,6 +199,7 @@ public class Ventana extends javax.swing.JFrame {
  * @param evt 
  */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+
     String direccion = Ruta;
         try {
             if (modelo.getSize()>0){
@@ -241,9 +242,6 @@ public class Ventana extends javax.swing.JFrame {
         } catch (Exception ex) {
                     JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
                 }
-    
-        
-    
     }//GEN-LAST:event_playActionPerformed
 
 /**
