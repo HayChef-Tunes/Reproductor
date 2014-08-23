@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author mell
  */
 
+/*soy max*/
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
     Metadatos informacion = null;
