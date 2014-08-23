@@ -170,24 +170,26 @@ public class Ventana extends javax.swing.JFrame {
         dig.setFileFilter(filter);
         int option = dig.showOpenDialog(this);  // Abre la ventana en dialogo
         if (option == JFileChooser.APPROVE_OPTION){
-            String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
-            //Muestra nombre del archivo 
-            String datos=informacion.datos(file);
-            if (informacion.getRutaImagen()!=null){
-                RutaImagen=informacion.getRutaImagen();
-                ImageIcon imagen =new ImageIcon(RutaImagen);
-                jLabel2.setIcon(imagen);
-                imagen = null;
+            try {
+                String file = dig.getSelectedFile().getPath();  //Obtener ruta y nombre al hacer click
+                //Muestra nombre del archivo
+                String datos=informacion.datos(file);
+                if (informacion.getRutaImagen()!=null){
+                    RutaImagen=informacion.getRutaImagen();
+                    ImageIcon imagen =new ImageIcon(RutaImagen);
+                    jLabel2.setIcon(imagen);
+                    imagen = null;
+                }
+                else{
+                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+                }
+                Datos.setText(datos);
+                Ruta=file;
+                modelo.addElement(informacion.Titulo);
+                jList1.setSelectedIndex(0);
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
-            }
-            Datos.setText(datos);
-            Ruta=file;
-            modelo.addElement(informacion.Titulo);
-            //txtname.setText("");
-            //txtname.requestFocus();
-            jList1.setSelectedIndex(0);
             
         }
     }//GEN-LAST:event_add_songActionPerformed
