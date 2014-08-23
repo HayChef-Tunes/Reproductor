@@ -29,7 +29,10 @@ player.play();
  * @throws Exception 
  */
 public void AbrirFichero(String ruta) throws Exception {
-player.open(new File(ruta));
+    if (ruta != null ){
+        player.open(new File(ruta));
+    }
+    
 }
 /**
  * 
