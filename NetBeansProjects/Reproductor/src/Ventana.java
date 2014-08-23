@@ -58,6 +58,11 @@ public class Ventana extends javax.swing.JFrame {
         setBackground(java.awt.Color.gray);
 
         previous_song.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/ant.png"))); // NOI18N
+        previous_song.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previous_songActionPerformed(evt);
+            }
+        });
 
         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/play.png"))); // NOI18N
         play.addActionListener(new java.awt.event.ActionListener() {
@@ -331,6 +336,27 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void previous_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previous_songActionPerformed
+        // TODO add your handling code here:
+          try {
+                cancion.Stop();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int n = jList1.getSelectedIndex();
+            String archivo;
+        try {
+            jList1.setSelectedIndex(n-1);
+            archivo = LISTA.getElemento(n-1);
+            cancion.AbrirFichero(archivo);
+            cancion.Play();
+            ;
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_previous_songActionPerformed
     
     /**
      * Main de la clase Ventana

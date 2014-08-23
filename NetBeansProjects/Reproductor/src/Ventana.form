@@ -110,6 +110,9 @@
           <Image iconType="3" name="/Imagenes/iconos/ant.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previous_songActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="play">
       <Properties>
