@@ -163,12 +163,12 @@ public class Ventana extends javax.swing.JFrame {
                                 .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(previous_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(next_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(delete_song)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(next_song, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(delete_song, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(add_song))))))
+                                    .addComponent(add_song, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(previous_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
@@ -220,7 +220,6 @@ public class Ventana extends javax.swing.JFrame {
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
 
     String direccion = Ruta;
-        try {
             if (modelo.getSize()>0){
                 if (contador ==0){
                     try {
@@ -258,9 +257,7 @@ public class Ventana extends javax.swing.JFrame {
                     }
                 }
             }
-        } catch (Exception ex) {
-                    JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
-                }
+            
     }//GEN-LAST:event_playActionPerformed
 
 /**
@@ -293,10 +290,14 @@ public class Ventana extends javax.swing.JFrame {
             modelo.removeElementAt(n);
             jList1.setSelectedIndex(0);
         }
+        if (modelo.getSize() == 0){
+            Datos.setText("");            
+        }
     }//GEN-LAST:event_delete_songActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Datos.setText("");
         modelo.removeAllElements();
     }//GEN-LAST:event_jButton1ActionPerformed
     
