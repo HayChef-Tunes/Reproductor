@@ -277,7 +277,8 @@ public class Ventana extends javax.swing.JFrame {
             jList1.setSelectedIndex(n+1);
             archivo = LISTA.getElemento(n+1);
             cancion = new Reproductor();
-            
+            String datos=informacion.datos(archivo);
+            Datos.setText(datos);
             cancion.AbrirFichero(archivo);
             imagenlabel();
             cancion.Play();
