@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author mell
  */
 
+/*soy max*/
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
     Metadatos informacion = null;
@@ -198,41 +199,51 @@ public class Ventana extends javax.swing.JFrame {
  * @param evt 
  */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
-        String direccion = Ruta;
-        if (contador ==0){
-            try {
-                cancion.AbrirFichero(direccion);
-                cancion.Play();
-                if (informacion.getRutaImagen()==null){
-                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+    String direccion = Ruta;
+        try {
+            if (modelo.getSize()>0){
+                if (contador ==0){
+                    try {
+                        cancion.AbrirFichero(direccion);
+                        cancion.Play();
+                        if (informacion.getRutaImagen()==null){
+                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+                        }
+                        contador=1;
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+                    }
                 }
-                contador=1;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
-            }
-}
-        else if (contador ==1){
-            try {
-                cancion.Pausa();
-                if (informacion.getRutaImagen()==null){
-                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+
+                else if (contador ==1){
+                    try {
+                        cancion.Pausa();
+                        if (informacion.getRutaImagen()==null){
+                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+                        }
+                        contador=2;
+                    } catch (Exception ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                contador=2;
-            } catch (Exception ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            try {
-                cancion.Continuar();
-                if (informacion.getRutaImagen()==null){
-                    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+                else {
+                    try {
+                        cancion.Continuar();
+                        if (informacion.getRutaImagen()==null){
+                            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+                        }
+                        contador = 1;
+                    } catch (Exception ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                contador = 1;
-            } catch (Exception ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } catch (Exception ex) {
+                    JOptionPane.showMessageDialog (null, "Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
+                }
+    
+        
+    
     }//GEN-LAST:event_playActionPerformed
 
 /**
