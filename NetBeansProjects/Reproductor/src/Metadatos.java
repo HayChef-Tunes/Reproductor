@@ -110,7 +110,6 @@ public class Metadatos {
     public String getTitulo(String ruta){
         String titulo;
         try {
-            
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
             ID3v1 tag = mp3file.getID3v1Tag();
@@ -126,7 +125,6 @@ public class Metadatos {
     public String getAlbum(String ruta){
         String album;
         try {
-            
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
             ID3v1 tag = mp3file.getID3v1Tag();
@@ -138,6 +136,5 @@ public class Metadatos {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-       
+    }       
 }

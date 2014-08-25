@@ -49,7 +49,11 @@
                           <Component id="jScrollPane3" alignment="0" pref="254" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Artista" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="Titulo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Artista" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Album" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="jScrollPane2" min="-2" pref="367" max="-2" attributes="0"/>
               </Group>
@@ -118,6 +122,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="Artista" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Titulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="Album" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -297,5 +305,21 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="Titulo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Titulo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TituloActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Album">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Album"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlbumActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
