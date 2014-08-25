@@ -59,19 +59,19 @@ class ArrayList {
             this.size = 0;
         }
 
-	public void delete (String e) {
-		for (int i=0; i < this.size; i++) {
-			if (e == arreglo[i]) {
-				int c =i;
-				while (c < (this.size-2)){
-					arreglo[c] = arreglo[c+1];
-					c=c+1;
+	public void delete (int e) {
+		for (int i=0; i <= this.size; i++) {
+			if (i == e) {
+                                //arreglo[i].				//int c = i;
+				//while (c < (this.size-1)){
+					//arreglo[c] = arreglo[c+1];
+					//c=c+1;
 				}
-				this.size = i + c;
+				//this.size = i + c;
 			}
 		}
 	}
-}
+//}
 
 
 

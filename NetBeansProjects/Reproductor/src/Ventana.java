@@ -167,12 +167,14 @@ public class Ventana extends javax.swing.JFrame {
                         .addGap(119, 119, 119))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(139, 139, 139)
                                 .addComponent(Artista))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -324,6 +326,7 @@ public class Ventana extends javax.swing.JFrame {
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         try {
             cancion.Stop();
+            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
             jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
             contador = 0;
         } catch (Exception ex) {
@@ -334,17 +337,21 @@ public class Ventana extends javax.swing.JFrame {
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
         try {
             cancion.Stop();
+            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if (modelo.getSize()>0){
+            if (modelo.getSize()>=0){
                 int n = jList1.getSelectedIndex();
                 modelo.removeElementAt(n);
+                LISTA.delete(n);
                 jList1.setSelectedIndex(--indice);
+                Datos.setText("");
+                Elementos.setText(String.valueOf(LISTA.getSize()));
             }
-            if (modelo.getSize() >= 0){
-               Datos.setText("");            
-            }
+            //if (modelo.getSize() >= 0){
+              // Datos.setText("");            
+            //}
     }//GEN-LAST:event_delete_songActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
