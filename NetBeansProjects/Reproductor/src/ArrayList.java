@@ -35,12 +35,9 @@ class ArrayList {
 	}
 	
 	public String getElemento (int indice) throws Exception {
-                if (indice < 0){
-			return this.arreglo [this.size];
 
-		}
 		if (indice >= this.size){
-			return this.arreglo [0];
+			return this.arreglo [indice];
 
 		}
 		if (indice < this.size) {

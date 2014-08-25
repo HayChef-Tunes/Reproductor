@@ -32,6 +32,7 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(12,20,16));
+        Elementos.setText(String.valueOf(LISTA.getSize()));
         
     }
     
@@ -53,7 +54,7 @@ public class Ventana extends javax.swing.JFrame {
         modelo = new DefaultListModel();
         jList1 = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        Elementos = new javax.swing.JLabel();
         Artista = new javax.swing.JButton();
         Nombre = new javax.swing.JTextField();
 
@@ -121,7 +122,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(248, 236, 236));
         jLabel3.setText("Lista de Reproduccion:");
 
-        jLabel4.setForeground(new java.awt.Color(249, 235, 235));
+        Elementos.setForeground(new java.awt.Color(249, 235, 235));
 
         Artista.setText("Artista");
         Artista.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +163,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(119, 119, 119))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +207,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -228,8 +229,9 @@ public class Ventana extends javax.swing.JFrame {
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
                 jList1.setSelectedIndex(indice);
-                indice++;
+                //indice++;
                 LISTA.add(file);
+                Elementos.setText(String.valueOf(LISTA.getSize()));
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -249,6 +251,7 @@ public class Ventana extends javax.swing.JFrame {
             if (modelo.getSize()>0){
                 if (contador ==0){
                     try {
+                        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         elemento = LISTA.getElemento(i);
                         String datos=informacion.datos(elemento);
                         Datos.setText(datos);
@@ -264,6 +267,7 @@ public class Ventana extends javax.swing.JFrame {
                 else if (contador ==1){
                     try {
                         cancion.Pausa();
+                        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
                         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
                         contador=2;
                     } catch (Exception ex) {
@@ -273,6 +277,7 @@ public class Ventana extends javax.swing.JFrame {
                 else {
                     try {
                         cancion.Continuar();
+                        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         imagenlabel();
                         contador = 1;
                     } catch (Exception ex) {
@@ -298,7 +303,7 @@ public class Ventana extends javax.swing.JFrame {
             int n = jList1.getSelectedIndex();
             String archivo;
         try {
-                jList1.setSelectedIndex(n+1);
+                jList1.setSelectedIndex(++indice);
                 archivo = LISTA.getElemento(n+1);
                 String datos=informacion.datos(archivo);
                 Datos.setText(datos);
@@ -365,7 +370,7 @@ public class Ventana extends javax.swing.JFrame {
             String archivo;
         try {
 
-                jList1.setSelectedIndex(n-1);
+                jList1.setSelectedIndex(--indice);
                 archivo = LISTA.getElemento(n-1);
                 cancion = new Reproductor();
                 String datos=informacion.datos(archivo);
@@ -423,13 +428,13 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Artista;
     private javax.swing.JTextArea Datos;
+    private javax.swing.JLabel Elementos;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JList jList1;
     private DefaultListModel modelo;
     private javax.swing.JScrollPane jScrollPane1;
