@@ -59,6 +59,8 @@ public class Ventana extends javax.swing.JFrame {
         Nombre = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaBuscador = new javax.swing.JList();
+        Titulo = new javax.swing.JButton();
+        Album = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -143,6 +145,20 @@ public class Ventana extends javax.swing.JFrame {
         listaBuscador.setModel(modelo2);
         jScrollPane3.setViewportView(listaBuscador);
 
+        Titulo.setText("Titulo");
+        Titulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TituloActionPerformed(evt);
+            }
+        });
+
+        Album.setText("Album");
+        Album.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlbumActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +184,10 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(Nombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Artista))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Artista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Album, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -222,6 +241,10 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(Artista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Titulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Album)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -425,6 +448,42 @@ public class Ventana extends javax.swing.JFrame {
             }
             }
     }//GEN-LAST:event_ArtistaActionPerformed
+
+    private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
+        modelo2.clear();
+        Metadatos direccion = new Metadatos();
+        for(int i=0;i<LISTA.getSize();i++){
+            try {
+                String ruta = LISTA.getElemento(i);
+                String nombre = direccion.getTitulo(ruta);
+                nombre_txt = Nombre.getText();
+                if (nombre.equals(nombre_txt)){
+                    modelo2.addElement(nombre);
+                }
+            } 
+            catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+    }//GEN-LAST:event_TituloActionPerformed
+
+    private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
+        modelo2.clear();
+        Metadatos direccion = new Metadatos();
+        for(int i=0;i<LISTA.getSize();i++){
+            try {
+                String ruta = LISTA.getElemento(i);
+                String album = direccion.getAlbum(ruta);
+                String nombre = direccion.getTitulo(ruta);
+                nombre_txt = Nombre.getText();
+                if (album.equals(nombre_txt)){
+                    modelo2.addElement(nombre);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+    }//GEN-LAST:event_AlbumActionPerformed
     
     /**
      * Main de la clase Ventana
@@ -459,10 +518,12 @@ public class Ventana extends javax.swing.JFrame {
      * Se declaran las variables
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Album;
     private javax.swing.JButton Artista;
     private javax.swing.JTextArea Datos;
     private javax.swing.JLabel Elementos;
     private javax.swing.JTextField Nombre;
+    private javax.swing.JButton Titulo;
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
     private javax.swing.JLabel jLabel1;
