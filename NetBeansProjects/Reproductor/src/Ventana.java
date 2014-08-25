@@ -31,7 +31,7 @@ public class Ventana extends javax.swing.JFrame {
         LISTA = new ArrayList();
         initComponents();
         this.setTitle("HayChef-Tunes");
-        getContentPane().setBackground(new java.awt.Color(12,20,16));
+        getContentPane().setBackground(new java.awt.Color(0,0,0));
         Elementos.setText(String.valueOf(LISTA.getSize()));
         
     }
@@ -61,7 +61,7 @@ public class Ventana extends javax.swing.JFrame {
         listaBuscador = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(java.awt.Color.gray);
+        setBackground(new java.awt.Color(0, 0, 0));
 
         previous_song.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/ant.png"))); // NOI18N
         previous_song.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,6 @@ public class Ventana extends javax.swing.JFrame {
         Datos.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         Datos.setForeground(new java.awt.Color(255, 255, 255));
         Datos.setRows(5);
-        Datos.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(Datos);
 
         jList1.setModel(modelo);
@@ -355,7 +354,6 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
             if (modelo.getSize()>=0){
-                
                 int n = jList1.getSelectedIndex();
                 modelo.removeElementAt(n);
                 LISTA.delete(n);
@@ -411,17 +409,16 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreActionPerformed
 
     private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
+        modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
             try {
                 String ruta = LISTA.getElemento(i);
                 String artista = direccion.getArtista(ruta);
+                String nombre = direccion.getTitulo(ruta);
                 nombre_txt = Nombre.getText();
-                System.out.println(nombre_txt);
-                System.out.println(artista);
                 if (artista.equals(nombre_txt)){
-                    System.out.println("si son iguales");
-                    modelo2.addElement(ruta);
+                    modelo2.addElement(nombre);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
