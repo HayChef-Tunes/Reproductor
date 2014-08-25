@@ -64,6 +64,7 @@ public class Metadatos {
             File imagen=new File(ruta+".jpg");
             ImageIO.write(dest,"JPG",imagen);
             ImagenRuta = (ruta+".jpg");
+            File direccion = new File(ruta); 
                         
         }    
          else {
@@ -75,6 +76,7 @@ public class Metadatos {
         Artista="Artista: "+tag.getArtist();
         Año="Año: "+tag.getYear();
         Duración="Duración: "+duration+"s";
+        
         } catch (IOException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TagException ex) {

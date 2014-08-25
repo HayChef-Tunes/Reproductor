@@ -356,6 +356,7 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
             if (modelo.getSize()>=0){
+                
                 int n = jList1.getSelectedIndex();
                 modelo.removeElementAt(n);
                 LISTA.delete(n);

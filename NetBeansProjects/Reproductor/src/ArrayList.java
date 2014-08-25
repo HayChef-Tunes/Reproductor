@@ -61,8 +61,10 @@ class ArrayList {
 
 	public void delete (int e) {
 		for (int i=0; i <= this.size; i++) {
-			if (i == e) {
-                                //arreglo[i].				//int c = i;
+			if (arreglo[i] == arreglo[e]) {
+                                arreglo[e] = arreglo[++i];
+                                --this.size;
+                                //int c = i;
 				//while (c < (this.size-1)){
 					//arreglo[c] = arreglo[c+1];
 					//c=c+1;
