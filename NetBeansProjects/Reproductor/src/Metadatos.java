@@ -107,5 +107,37 @@ public class Metadatos {
         }
         return null;
     }
+    public String getTitulo(String ruta){
+        String titulo;
+        try {
+            
+            File sourceFile = new File(ruta);
+            MP3File mp3file = new MP3File(sourceFile);
+            ID3v1 tag = mp3file.getID3v1Tag();
+            titulo=tag.getTitle();
+            return titulo;
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public String getAlbum(String ruta){
+        String album;
+        try {
+            
+            File sourceFile = new File(ruta);
+            MP3File mp3file = new MP3File(sourceFile);
+            ID3v1 tag = mp3file.getID3v1Tag();
+            album=tag.getAlbum();
+            return album;
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
        
 }
