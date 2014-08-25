@@ -32,6 +32,7 @@ public void AbrirFichero(String ruta) throws Exception {
     if (ruta != null ){
         player.open(new File(ruta));
     }
+
     
 }
 /**

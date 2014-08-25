@@ -266,21 +266,22 @@ public class Ventana extends javax.swing.JFrame {
         try {
                 cancion.Stop();
                 cancion = null;
+                cancion = new Reproductor();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             int n = jList1.getSelectedIndex();
             String archivo;
         try {
+                jList1.setSelectedIndex(n+1);
+                archivo = LISTA.getElemento(n+1);
+                String datos=informacion.datos(archivo);
+                Datos.setText(datos);
+                cancion.AbrirFichero(archivo);
+                imagenlabel();
+                cancion.Play();
             
-            jList1.setSelectedIndex(n+1);
-            archivo = LISTA.getElemento(n+1);
-            cancion = new Reproductor();
-            String datos=informacion.datos(archivo);
-            Datos.setText(datos);
-            cancion.AbrirFichero(archivo);
-            imagenlabel();
-            cancion.Play();
+            
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -338,14 +339,16 @@ public class Ventana extends javax.swing.JFrame {
             int n = jList1.getSelectedIndex();
             String archivo;
         try {
-            jList1.setSelectedIndex(n-1);
-            archivo = LISTA.getElemento(n-1);
-            cancion = new Reproductor();
-            String datos=informacion.datos(archivo);
-            Datos.setText(datos);
-            cancion.AbrirFichero(archivo);
-            imagenlabel();
-            cancion.Play();
+
+                jList1.setSelectedIndex(n-1);
+                archivo = LISTA.getElemento(n-1);
+                cancion = new Reproductor();
+                String datos=informacion.datos(archivo);
+                Datos.setText(datos);
+                cancion.AbrirFichero(archivo);
+                imagenlabel();
+                cancion.Play();
+            
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }

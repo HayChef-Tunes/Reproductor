@@ -35,15 +35,15 @@ class ArrayList {
 	}
 	
 	public String getElemento (int indice) throws Exception {
-                if (indice == -1){
-			JOptionPane.showMessageDialog (null,"Es la primera canción","Error",ERROR_MESSAGE);
+                if (indice < 0){
+			return this.arreglo [this.size];
 
 		}
 		if (indice >= this.size){
-			JOptionPane.showMessageDialog (null," Agregue otra canción para reproducir","Error",ERROR_MESSAGE);
+			return this.arreglo [0];
 
 		}
-		else {
+		if (indice < this.size) {
 			return this.arreglo [indice];
 		}
             return null;
