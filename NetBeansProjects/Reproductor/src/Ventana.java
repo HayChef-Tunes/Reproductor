@@ -57,6 +57,8 @@ public class Ventana extends javax.swing.JFrame {
         Elementos = new javax.swing.JLabel();
         Artista = new javax.swing.JButton();
         Nombre = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaBuscador = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.gray);
@@ -137,6 +139,11 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        modelo2 = new DefaultListModel();
+        listaBuscador = new javax.swing.JList();
+        listaBuscador.setModel(modelo2);
+        jScrollPane3.setViewportView(listaBuscador);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,16 +154,21 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(previous_song)
-                        .addGap(18, 18, 18)
-                        .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(next_song, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(add_song, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(previous_song)
+                                .addGap(18, 18, 18)
+                                .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(next_song, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(add_song, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)))
                         .addComponent(delete_song, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -196,6 +208,8 @@ public class Ventana extends javax.swing.JFrame {
                                     .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(add_song, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(previous_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -397,7 +411,22 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreActionPerformed
 
     private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
-        // TODO add your handling code here:
+        Metadatos direccion = new Metadatos();
+        for(int i=0;i<LISTA.getSize();i++){
+            try {
+                String ruta = LISTA.getElemento(i);
+                String artista = direccion.getArtista(ruta);
+                nombre_txt = Nombre.getText();
+                System.out.println(nombre_txt);
+                System.out.println(artista);
+                if (artista.equals(nombre_txt)){
+                    System.out.println("si son iguales");
+                    modelo2.addElement(ruta);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
     }//GEN-LAST:event_ArtistaActionPerformed
     
     /**
@@ -446,6 +475,9 @@ public class Ventana extends javax.swing.JFrame {
     private DefaultListModel modelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList listaBuscador;
+    private DefaultListModel modelo2;
     private javax.swing.JButton next_song;
     private javax.swing.JButton play;
     private javax.swing.JButton previous_song;
@@ -453,6 +485,7 @@ public class Ventana extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public String RutaImagen = null;
     public int contador = 0;
+    public String nombre_txt;
 
     private String String(String Titulo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

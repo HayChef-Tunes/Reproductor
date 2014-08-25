@@ -88,5 +88,22 @@ public class Metadatos {
         return ImagenRuta;
     
     }
+    
+    public String getArtista(String ruta){
+        String artista;
+        try {
+            
+            File sourceFile = new File(ruta);
+            MP3File mp3file = new MP3File(sourceFile);
+            ID3v1 tag = mp3file.getID3v1Tag();
+            artista=tag.getArtist();
+            return artista;
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
        
 }
