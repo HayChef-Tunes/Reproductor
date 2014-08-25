@@ -30,7 +30,7 @@ class ArrayList {
 
 	public void getLista () {
 		for (int a=0; a < this.size; a++) {
-			System.out.println( arreglo [a]);
+			//System.out.println( arreglo [a]);
 		}
 	}
 	
@@ -64,16 +64,13 @@ class ArrayList {
 			if (arreglo[i] == arreglo[e]) {
                                 arreglo[e] = arreglo[++i];
                                 --this.size;
-                                //int c = i;
-				//while (c < (this.size-1)){
-					//arreglo[c] = arreglo[c+1];
-					//c=c+1;
+                                
 				}
-				//this.size = i + c;
+				
 			}
 		}
 	}
-//}
+
 
 
 

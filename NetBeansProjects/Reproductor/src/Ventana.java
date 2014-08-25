@@ -46,14 +46,14 @@ public class Ventana extends javax.swing.JFrame {
         add_song = new javax.swing.JButton();
         delete_song = new javax.swing.JButton();
         stop = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        HayChefTunes = new javax.swing.JLabel();
+        ImagenPortada = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Datos = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         modelo = new DefaultListModel();
-        jList1 = new javax.swing.JList();
-        jLabel3 = new javax.swing.JLabel();
+        ListaCanciones = new javax.swing.JList();
+        Etiquetatotalcanciones = new javax.swing.JLabel();
         Elementos = new javax.swing.JLabel();
         Artista = new javax.swing.JButton();
         Nombre = new javax.swing.JTextField();
@@ -105,9 +105,9 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/10613976_10202981559034008_418052797_n.jpg"))); // NOI18N
+        HayChefTunes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/10613976_10202981559034008_418052797_n.jpg"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png"))); // NOI18N
+        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png"))); // NOI18N
 
         Datos.setEditable(false);
         Datos.setBackground(new java.awt.Color(0, 0, 0));
@@ -117,11 +117,11 @@ public class Ventana extends javax.swing.JFrame {
         Datos.setRows(5);
         jScrollPane2.setViewportView(Datos);
 
-        jList1.setModel(modelo);
-        jScrollPane1.setViewportView(jList1);
+        ListaCanciones.setModel(modelo);
+        jScrollPane1.setViewportView(ListaCanciones);
 
-        jLabel3.setForeground(new java.awt.Color(248, 236, 236));
-        jLabel3.setText("Lista de Reproduccion:");
+        Etiquetatotalcanciones.setForeground(new java.awt.Color(248, 236, 236));
+        Etiquetatotalcanciones.setText("Lista de Reproduccion:");
 
         Elementos.setForeground(new java.awt.Color(249, 235, 235));
 
@@ -150,7 +150,7 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HayChefTunes, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(previous_song)
                         .addGap(18, 18, 18)
@@ -176,10 +176,10 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(jLabel3)
+                        .addComponent(Etiquetatotalcanciones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -187,17 +187,17 @@ public class Ventana extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(Etiquetatotalcanciones)
                     .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(HayChefTunes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -225,6 +225,8 @@ public class Ventana extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
+        Etiquetatotalcanciones.getAccessibleContext().setAccessibleName("Canciones en Reproducción:");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
@@ -242,7 +244,7 @@ public class Ventana extends javax.swing.JFrame {
                 String datos=informacion.datos(file);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
-                jList1.setSelectedIndex(indice);
+                ListaCanciones.setSelectedIndex(indice);
                 //indice++;
                 LISTA.add(file);
                 Elementos.setText(String.valueOf(LISTA.getSize()));
@@ -259,7 +261,7 @@ public class Ventana extends javax.swing.JFrame {
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
 
     //String direccion = Ruta;
-    int i = jList1.getSelectedIndex();
+    int i = ListaCanciones.getSelectedIndex();
     String elemento;
     
             if (modelo.getSize()>0){
@@ -282,7 +284,7 @@ public class Ventana extends javax.swing.JFrame {
                     try {
                         cancion.Pausa();
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
-                        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+                        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
                         contador=2;
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,10 +316,10 @@ public class Ventana extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int n = jList1.getSelectedIndex();
+            int n = ListaCanciones.getSelectedIndex();
             String archivo;
         try {
-                jList1.setSelectedIndex(++indice);
+                ListaCanciones.setSelectedIndex(++indice);
                 archivo = LISTA.getElemento(n+1);
                 String datos=informacion.datos(archivo);
                 Datos.setText(datos);
@@ -339,7 +341,7 @@ public class Ventana extends javax.swing.JFrame {
         try {
             cancion.Stop();
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
-            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
             contador = 0;
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,15 +351,16 @@ public class Ventana extends javax.swing.JFrame {
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
         try {
             cancion.Stop();
-            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
+            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
             if (modelo.getSize()>=0){
-                int n = jList1.getSelectedIndex();
+                int n = ListaCanciones.getSelectedIndex();
                 modelo.removeElementAt(n);
                 LISTA.delete(n);
-                jList1.setSelectedIndex(--indice);
+                ListaCanciones.setSelectedIndex(--indice);
                 Datos.setText("");
                 Elementos.setText(String.valueOf(LISTA.getSize()));
             }
@@ -385,11 +388,11 @@ public class Ventana extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int n = jList1.getSelectedIndex();
+            int n = ListaCanciones.getSelectedIndex();
             String archivo;
         try {
 
-                jList1.setSelectedIndex(--indice);
+                ListaCanciones.setSelectedIndex(--indice);
                 archivo = LISTA.getElemento(n-1);
                 cancion = new Reproductor();
                 String datos=informacion.datos(archivo);
@@ -462,14 +465,14 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton Artista;
     private javax.swing.JTextArea Datos;
     private javax.swing.JLabel Elementos;
+    private javax.swing.JLabel Etiquetatotalcanciones;
+    private javax.swing.JLabel HayChefTunes;
+    private javax.swing.JLabel ImagenPortada;
+    private javax.swing.JList ListaCanciones;
+    private DefaultListModel modelo;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
-    private DefaultListModel modelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -492,14 +495,14 @@ public class Ventana extends javax.swing.JFrame {
         if (informacion.getRutaImagen()!=null){
             RutaImagen=informacion.getRutaImagen();
             ImageIcon imagen =new ImageIcon(RutaImagen);
-            jLabel2.setIcon(imagen);
+            ImagenPortada.setIcon(imagen);
             imagen = null;
         }
         else if (informacion.getRutaImagen()==null){
-            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
         }
         else{
-            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
         }
     }
 }
