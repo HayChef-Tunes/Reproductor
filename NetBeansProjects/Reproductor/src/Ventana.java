@@ -120,11 +120,7 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         Clear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/limpiar2.png"))); // NOI18N
-        Clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClearActionPerformed(evt);
-            }
-        });
+        
 
         jLabel3.setForeground(new java.awt.Color(248, 236, 236));
         jLabel3.setText("Lista de Reproduccion:");
