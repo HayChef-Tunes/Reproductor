@@ -11,6 +11,9 @@ import org.farng.mp3.TagException;
 import org.farng.mp3.id3.ID3v1;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
@@ -136,5 +139,26 @@ public class Metadatos {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }       
+    }
+    
+    public long getSegundos(String ruta){
+        try {
+            long duration = 0;
+            AudioFile audioFile;
+            audioFile = AudioFileIO.read(new File(ruta));
+            duration = audioFile.getAudioHeader().getTrackLength();
+            return duration;
+        } catch (CannotReadException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (org.jaudiotagger.tag.TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ReadOnlyFileException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidAudioFrameException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }
