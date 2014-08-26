@@ -35,16 +35,20 @@ class ArrayList {
 	}
 	
 	public String getElemento (int indice) throws Exception {
+                        
 
-		if (indice >= this.size){
-			return this.arreglo [indice];
-
-		}
-		if (indice < this.size) {
-			return this.arreglo [indice];
-		}
-            return null;
-	}
+		
+		if ((indice >= 0 ) && (indice <= this.size)){
+                    return this.arreglo [indice];
+                } else {
+                }
+                if (indice > this.size) {
+			JOptionPane.showMessageDialog (null," Es la ultima canción","Error",ERROR_MESSAGE);
+                
+            
+            }
+                return null;
+        }
 
 	public String find (String e) {
 		for (int i=0; i < this.size; i++) {
