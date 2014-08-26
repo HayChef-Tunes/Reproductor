@@ -20,7 +20,6 @@ public class Ventana extends javax.swing.JFrame {
     hiloNext siguiente = null;
     
     public String Ruta;
-    public int indice = 0;
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
     
     /**
@@ -269,8 +268,6 @@ public class Ventana extends javax.swing.JFrame {
                 String datos=informacion.datos(file);
                 Ruta=file;
                 modelo.addElement(informacion.Titulo);
-                ListaCanciones.setSelectedIndex(indice);
-                //indice++;
                 LISTA.add(file);
                 Elementos.setText(String.valueOf(LISTA.getSize()));
             } catch (Exception ex) {
@@ -336,6 +333,7 @@ public class Ventana extends javax.swing.JFrame {
  * @param evt 
  */
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
+
         try {
                 cancion.Stop();
                 cancion = null;
@@ -347,7 +345,7 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println(n);
             String archivo;
         try {
-                ListaCanciones.setSelectedIndex(++indice);
+                ListaCanciones.setSelectedIndex(n+1);
                 archivo = LISTA.getElemento(n+1);
                 System.out.println(archivo);
                 String datos=informacion.datos(archivo);
@@ -372,6 +370,7 @@ public class Ventana extends javax.swing.JFrame {
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
             contador = 0;
+            Datos.setText("");
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -389,7 +388,7 @@ public class Ventana extends javax.swing.JFrame {
                 int n = ListaCanciones.getSelectedIndex();
                 modelo.removeElementAt(n);
                 LISTA.delete(n);
-                ListaCanciones.setSelectedIndex(--indice);
+                ListaCanciones.setSelectedIndex(n-1);
                 Datos.setText("");
                 Elementos.setText(String.valueOf(LISTA.getSize()));
             }
@@ -421,7 +420,7 @@ public class Ventana extends javax.swing.JFrame {
             String archivo;
         try {
 
-                ListaCanciones.setSelectedIndex(--indice);
+                ListaCanciones.setSelectedIndex(n-1);
                 archivo = LISTA.getElemento(n-1);
                 cancion = new Reproductor();
                 String datos=informacion.datos(archivo);
@@ -585,7 +584,7 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println(n);
             String archivo;
         try {
-                ListaCanciones.setSelectedIndex(++indice);
+                ListaCanciones.setSelectedIndex(n+1);
                 archivo = LISTA.getElemento(n+1);
                 System.out.println(archivo);
                 System.out.println("si paso");
