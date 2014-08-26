@@ -298,6 +298,7 @@ public class Ventana extends javax.swing.JFrame {
                         imagenlabel();
                         cancion.Play();
                         contador=1;
+                        //next_song(informacion.getSegundos(elemento));
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
                     }
@@ -566,4 +567,35 @@ public class Ventana extends javax.swing.JFrame {
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
         }
     }
+    
+   /* public void next_song(long segundos){
+        try {
+            Thread.sleep (segundos*1000);
+            System.out.println("si");
+            try {
+                cancion.Stop();
+                cancion = null;
+                cancion = new Reproductor();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int n = ListaCanciones.getSelectedIndex();
+            String archivo;
+        try {
+                ListaCanciones.setSelectedIndex(++indice);
+                archivo = LISTA.getElemento(n+1);
+                String datos=informacion.datos(archivo);
+                Datos.setText(datos);
+                cancion.AbrirFichero(archivo);
+                imagenlabel();
+                cancion.Play();
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }*/
 }
