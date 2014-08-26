@@ -332,33 +332,47 @@ public class Ventana extends javax.swing.JFrame {
  * 
  * @param evt 
  */
+    @SuppressWarnings("empty-statement")
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
-
         try {
-                cancion.Stop();
-                cancion = null;
-                cancion = new Reproductor();
+                    cancion.Stop();
+                    cancion = null;
+                    cancion = new Reproductor();
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        String archivo;
+        int n = ListaCanciones.getSelectedIndex();
+        if (n+1 == LISTA.getSize()){
+            try {
+                    System.out.println("AQUI");
+                    ListaCanciones.setSelectedIndex(0);
+                    archivo = LISTA.getElemento(0);
+                    
+                    String datos=informacion.datos(archivo);
+                    Datos.setText(datos);
+                    cancion.AbrirFichero(archivo);
+                    imagenlabel();
+                    cancion.Play();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int n = ListaCanciones.getSelectedIndex();
-            System.out.println(n);
-            String archivo;
-        try {
-                ListaCanciones.setSelectedIndex(n+1);
-                archivo = LISTA.getElemento(n+1);
-                System.out.println(archivo);
-                String datos=informacion.datos(archivo);
-                Datos.setText(datos);
-                cancion.AbrirFichero(archivo);
-                imagenlabel();
-                cancion.Play();
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
+        }
+        else{    
+            try {
+                    ListaCanciones.setSelectedIndex(n+1);
+                    archivo = LISTA.getElemento(n+1);
+                    String datos=informacion.datos(archivo);
+                    Datos.setText(datos);
+                    cancion.AbrirFichero(archivo);
+                    imagenlabel();
+                    cancion.Play();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+
     }//GEN-LAST:event_next_songActionPerformed
 /**
  * 
@@ -388,7 +402,7 @@ public class Ventana extends javax.swing.JFrame {
                 int n = ListaCanciones.getSelectedIndex();
                 modelo.removeElementAt(n);
                 LISTA.delete(n);
-                ListaCanciones.setSelectedIndex(n-1);
+                //ListaCanciones.setSelectedIndex(n-1);
                 Datos.setText("");
                 Elementos.setText(String.valueOf(LISTA.getSize()));
             }
@@ -413,25 +427,40 @@ public class Ventana extends javax.swing.JFrame {
           try {
                 cancion.Stop();
                 cancion = null;
+                cancion = new Reproductor();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             int n = ListaCanciones.getSelectedIndex();
             String archivo;
-        try {
+            if (n-1 != -1){
+                try {
+                        ListaCanciones.setSelectedIndex(n-1);
+                        archivo = LISTA.getElemento(n-1);
+                        String datos=informacion.datos(archivo);
+                        Datos.setText(datos);
+                        cancion.AbrirFichero(archivo);
+                        imagenlabel();
+                        cancion.Play();
 
-                ListaCanciones.setSelectedIndex(n-1);
-                archivo = LISTA.getElemento(n-1);
-                cancion = new Reproductor();
-                String datos=informacion.datos(archivo);
-                Datos.setText(datos);
-                cancion.AbrirFichero(archivo);
-                imagenlabel();
-                cancion.Play();
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+            try {
+                        ListaCanciones.setSelectedIndex(LISTA.getSize()-1);
+                        archivo = LISTA.getElemento(LISTA.getSize()-1);
+                        String datos=informacion.datos(archivo);
+                        Datos.setText(datos);
+                        cancion.AbrirFichero(archivo);
+                        imagenlabel();
+                        cancion.Play();
+
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         
     }//GEN-LAST:event_previous_songActionPerformed
 

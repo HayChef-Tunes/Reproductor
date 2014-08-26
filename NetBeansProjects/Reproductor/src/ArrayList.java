@@ -42,7 +42,7 @@ class ArrayList {
                     return this.arreglo [indice];
                 } else {
                 }
-                if (indice > this.size) {
+                if (indice == 0) {
 			JOptionPane.showMessageDialog (null," Es la ultima canción","Error",ERROR_MESSAGE);
                 
             
