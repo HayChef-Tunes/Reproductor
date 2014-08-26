@@ -13,11 +13,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author mell
  */
 
-/*soy max*/
 public class Ventana extends javax.swing.JFrame {
     Reproductor cancion = null;
     Metadatos informacion = null;
     ArrayList LISTA = null;
+    hiloNext siguiente = null;
+    
     public String Ruta;
     public int indice = 0;
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
@@ -29,6 +30,7 @@ public class Ventana extends javax.swing.JFrame {
         cancion = new Reproductor();
         informacion = new Metadatos();
         LISTA = new ArrayList();
+        
         initComponents();
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(0,0,0));
@@ -298,7 +300,8 @@ public class Ventana extends javax.swing.JFrame {
                         imagenlabel();
                         cancion.Play();
                         contador=1;
-                        //next_song(informacion.getSegundos(elemento));
+                        siguiente = new hiloNext(informacion.getSegundos(elemento));
+                        siguiente.start();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
                     }
@@ -341,10 +344,12 @@ public class Ventana extends javax.swing.JFrame {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             int n = ListaCanciones.getSelectedIndex();
+            System.out.println(n);
             String archivo;
         try {
                 ListaCanciones.setSelectedIndex(++indice);
                 archivo = LISTA.getElemento(n+1);
+                System.out.println(archivo);
                 String datos=informacion.datos(archivo);
                 Datos.setText(datos);
                 cancion.AbrirFichero(archivo);
@@ -540,7 +545,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaBuscador;
     private DefaultListModel modelo2;
-    private javax.swing.JButton next_song;
+    public javax.swing.JButton next_song;
     private javax.swing.JButton play;
     private javax.swing.JButton previous_song;
     private javax.swing.JButton stop;
@@ -568,11 +573,8 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
     
-   /* public void next_song(long segundos){
-        try {
-            Thread.sleep (segundos*1000);
-            System.out.println("si");
-            try {
+    public void next(){
+    try {
                 cancion.Stop();
                 cancion = null;
                 cancion = new Reproductor();
@@ -580,22 +582,23 @@ public class Ventana extends javax.swing.JFrame {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             int n = ListaCanciones.getSelectedIndex();
+            System.out.println(n);
             String archivo;
         try {
                 ListaCanciones.setSelectedIndex(++indice);
                 archivo = LISTA.getElemento(n+1);
+                System.out.println(archivo);
+                System.out.println("si paso");
                 String datos=informacion.datos(archivo);
+                System.out.println("si paso22222");
                 Datos.setText(datos);
+                System.out.println("abriendo cancion");
                 cancion.AbrirFichero(archivo);
                 imagenlabel();
                 cancion.Play();
-            
-            
         } catch (Exception ex) {
+            System.out.println("cayo aqui");
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
+    }
 }
