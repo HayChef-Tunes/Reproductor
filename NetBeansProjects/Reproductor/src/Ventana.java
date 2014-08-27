@@ -311,6 +311,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
                         ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
                         contador=2;
+                        siguiente.suspend();
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -321,6 +322,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         imagenlabel();
                         contador = 1;
+                        siguiente.resume();
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -583,7 +585,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     public int contador = 0;
     public String nombre_txt;
     public long segundos;
-
+    public boolean nexo = true;
+    
     private String String(String Titulo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -649,8 +652,17 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     
     public void run (){
         try {
-            Thread.sleep(this.segundos * 1000);
-            next();
+            int segundero = 0;
+            while(true){
+                while(nexo){
+                Thread.sleep(1000);
+                segundero++;
+                if (segundero == segundos){
+                    next();
+                }
+               segundero = segundero;
+            }
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
