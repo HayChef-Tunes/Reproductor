@@ -13,11 +13,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author mell
  */
 
-public class Ventana extends javax.swing.JFrame {
+public class Ventana extends javax.swing.JFrame implements Runnable{
     Reproductor cancion = null;
     Metadatos informacion = null;
     ArrayList LISTA = null;
-    hiloNext siguiente = null;
+    Thread siguiente;
     
     public String Ruta;
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
@@ -297,7 +297,8 @@ public class Ventana extends javax.swing.JFrame {
                         imagenlabel();
                         cancion.Play();
                         contador=1;
-                        siguiente = new hiloNext(informacion.getSegundos(elemento));
+                        segundos = informacion.getSegundos(elemento);
+                        siguiente = new Thread (this);
                         siguiente.start();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
@@ -581,6 +582,7 @@ public class Ventana extends javax.swing.JFrame {
     public String RutaImagen = null;
     public int contador = 0;
     public String nombre_txt;
+    public long segundos;
 
     private String String(String Titulo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -602,31 +604,56 @@ public class Ventana extends javax.swing.JFrame {
     }
     
     public void next(){
-    try {
-                cancion.Stop();
-                cancion = null;
-                cancion = new Reproductor();
+        try {
+                    cancion.Stop();
+                    cancion = null;
+                    cancion = new Reproductor();
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        String archivo;
+        int n = ListaCanciones.getSelectedIndex();
+        if (n+1 == LISTA.getSize()){
+            try {
+                    System.out.println("AQUI");
+                    ListaCanciones.setSelectedIndex(0);
+                    archivo = LISTA.getElemento(0);
+                    
+                    String datos=informacion.datos(archivo);
+                    Datos.setText(datos);
+                    cancion.AbrirFichero(archivo);
+                    imagenlabel();
+                    cancion.Play();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            int n = ListaCanciones.getSelectedIndex();
-            System.out.println(n);
-            String archivo;
+        
+        }
+        else{    
+            try {
+                    ListaCanciones.setSelectedIndex(n+1);
+                    archivo = LISTA.getElemento(n+1);
+                    String datos=informacion.datos(archivo);
+                    Datos.setText(datos);
+                    cancion.AbrirFichero(archivo);
+                    imagenlabel();
+                    cancion.Play();
+                    segundos = informacion.getSegundos(archivo);
+                    siguiente = new Thread (this);
+                    siguiente.start();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+    }
+    
+    public void run (){
         try {
-                ListaCanciones.setSelectedIndex(n+1);
-                archivo = LISTA.getElemento(n+1);
-                System.out.println(archivo);
-                System.out.println("si paso");
-                String datos=informacion.datos(archivo);
-                System.out.println("si paso22222");
-                Datos.setText(datos);
-                System.out.println("abriendo cancion");
-                cancion.AbrirFichero(archivo);
-                imagenlabel();
-                cancion.Play();
-        } catch (Exception ex) {
-            System.out.println("cayo aqui");
+            Thread.sleep(this.segundos * 1000);
+            next();
+        } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }
