@@ -11,6 +11,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.farng.mp3.AbstractMP3Tag;
 import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.AbstractID3v2;
 import org.farng.mp3.id3.ID3v1;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -71,6 +73,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         Titulo = new javax.swing.JButton();
         Album = new javax.swing.JButton();
         Genero = new javax.swing.JButton();
+        DatoNuevo = new javax.swing.JTextField();
+        BotonArtista = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -176,6 +183,19 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        BotonArtista.setText("Artista");
+        BotonArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonArtistaActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Genero");
+
+        jButton3.setText("Album");
+
+        jButton4.setText("Titulo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,18 +228,28 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                             .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Etiquetatotalcanciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BotonArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Etiquetatotalcanciones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,9 +259,23 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Etiquetatotalcanciones)
-                    .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Etiquetatotalcanciones)
+                            .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotonArtista)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(HayChefTunes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -513,6 +557,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
+         */
     }//GEN-LAST:event_ArtistaActionPerformed
 
     private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
@@ -526,11 +573,17 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 if (nombre.equals(nombre_txt)){
                     modelo2.addElement(nombre);
                 }
+                /**
+                 * Recorre la lista de reproduccion buscando mp3 con el titulo introducido
+                 */
             } 
             catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
+         */
     }//GEN-LAST:event_TituloActionPerformed
 
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
@@ -545,10 +598,16 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 if (album.equals(nombre_txt)){
                     modelo2.addElement(nombre);
                 }
+                /**
+                 * Recorre toda la lista
+                 */
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
+         */
     }//GEN-LAST:event_AlbumActionPerformed
 
     private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
@@ -567,12 +626,31 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
+         */
     }//GEN-LAST:event_GeneroActionPerformed
-/**    */
-    /**
-     * Main de la clase Ventana
-     * @param args 
-     */
+
+    private void BotonArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonArtistaActionPerformed
+        int i = ListaCanciones.getSelectedIndex();
+        String elemento=null;
+        try {
+            elemento=LISTA.getElemento(i);
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            File sourceFile = new File(elemento);
+            MP3File mp3file = new MP3File(sourceFile);
+            AbstractID3v2 tag = mp3file.getID3v2Tag();
+            tag.setSongGenre(DatoNuevo.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BotonArtistaActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -604,6 +682,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Album;
     private javax.swing.JButton Artista;
+    private javax.swing.JButton BotonArtista;
+    private javax.swing.JTextField DatoNuevo;
     private javax.swing.JTextArea Datos;
     private javax.swing.JLabel Elementos;
     private javax.swing.JLabel Etiquetatotalcanciones;
@@ -616,6 +696,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton Titulo;
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
