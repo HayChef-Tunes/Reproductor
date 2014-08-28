@@ -26,10 +26,6 @@ import org.jaudiotagger.tag.Tag;
  */
 
 public class Ventana extends javax.swing.JFrame implements Runnable{
-    Reproductor cancion = null;
-    Metadatos informacion = null;
-    ArrayList LISTA = null;
-    Thread siguiente;
     
     public String Ruta;
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
@@ -121,9 +117,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         });
 
-        HayChefTunes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/10613976_10202981559034008_418052797_n.jpg"))); // NOI18N
+        HayChefTunes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/10613976_10202981559034008_418052797_n.jpg"))); // NOI18N
 
-        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png"))); // NOI18N
+        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconos/barras.png"))); // NOI18N
 
         Datos.setEditable(false);
         Datos.setBackground(new java.awt.Color(0, 0, 0));
@@ -332,8 +328,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     try {
                         cancion.Pausa();
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
-                        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+                        ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
                         contador=2;
+                        siguiente.suspend();
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -344,6 +341,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         imagenlabel();
                         contador = 1;
+                        siguiente.resume();
                     } catch (Exception ex) {
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -360,6 +358,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
         try {
                     cancion.Stop();
+                    siguiente.stop();
                     cancion = null;
                     cancion = new Reproductor();
                 } catch (Exception ex) {
@@ -369,7 +368,6 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         int n = ListaCanciones.getSelectedIndex();
         if (n+1 == LISTA.getSize()){
             try {
-                    System.out.println("AQUI");
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
                     
@@ -378,6 +376,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.AbrirFichero(archivo);
                     imagenlabel();
                     cancion.Play();
+                    segundos = informacion.getSegundos(archivo);
+                    siguiente = new Thread (this);
+                    siguiente.start();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -405,8 +406,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         try {
             cancion.Stop();
+            siguiente.stop();
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
-            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
             contador = 0;
             Datos.setText("");
         } catch (Exception ex) {
@@ -418,7 +420,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         try {
             cancion.Stop();
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
-            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -450,6 +452,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
           try {
                 cancion.Stop();
+                siguiente.stop();
                 cancion = null;
                 cancion = new Reproductor();
             } catch (Exception ex) {
@@ -466,7 +469,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         cancion.AbrirFichero(archivo);
                         imagenlabel();
                         cancion.Play();
-
+                        segundos = informacion.getSegundos(archivo);
+                        siguiente = new Thread (this);
+                        siguiente.start();
                 } catch (Exception ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -625,10 +630,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     public int contador = 0;
     public String nombre_txt;
     public long segundos;
-
-    private String String(String Titulo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean nexo = true;
+    Reproductor cancion = null;
+    Metadatos informacion = null;
+    ArrayList LISTA = null;
+    Thread siguiente;
     
     public void imagenlabel(){
         if (informacion.getRutaImagen()!=null){
@@ -638,10 +644,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             imagen = null;
         }
         else if (informacion.getRutaImagen()==null){
-            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/animated_music.gif")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/animated_music.gif")));
         }
         else{
-            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
         }
     }
     
@@ -657,7 +663,6 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         int n = ListaCanciones.getSelectedIndex();
         if (n+1 == LISTA.getSize()){
             try {
-                    System.out.println("AQUI");
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
                     
@@ -691,8 +696,17 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     
     public void run (){
         try {
-            Thread.sleep(this.segundos * 1000);
-            next();
+            int segundero = 0;
+            while(true){
+                while(nexo){
+                Thread.sleep(1000);
+                segundero++;
+                if (segundero == segundos){
+                    next();
+                }
+               segundero = segundero;
+            }
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }

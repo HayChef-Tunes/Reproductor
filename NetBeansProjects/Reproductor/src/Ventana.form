@@ -203,14 +203,14 @@
     <Component class="javax.swing.JLabel" name="HayChefTunes">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/10613976_10202981559034008_418052797_n.jpg"/>
+          <Image iconType="3" name="/Imagenes/iconos/10613976_10202981559034008_418052797_n.jpg"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="ImagenPortada">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/barras.png"/>
+          <Image iconType="3" name="/Imagenes/iconos/barras.png"/>
         </Property>
       </Properties>
     </Component>
