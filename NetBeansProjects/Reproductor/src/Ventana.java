@@ -20,6 +20,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     Thread siguiente;
     
     public String Ruta;
+    private String cancionsonando = "";
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
     
     /**
@@ -292,6 +293,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         elemento = LISTA.getElemento(i);
                         String datos=informacion.datos(elemento);
+                        cancionsonando = elemento;
                         Datos.setText(datos);
                         cancion.AbrirFichero(elemento);
                         imagenlabel();
@@ -392,24 +394,35 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_stopActionPerformed
 
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
+        int n = ListaCanciones.getSelectedIndex();
         try {
-            cancion.Stop();
-            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
-            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+            if (cancionsonando ==  LISTA.getElemento(n)){
+                try {
+                    cancion.Stop();
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
+                    ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (modelo.getSize()>=0){
+
+                    modelo.removeElementAt(n);
+                    LISTA.delete(n);
+                    //ListaCanciones.setSelectedIndex(n-1);
+                    Datos.setText("");
+                    Elementos.setText(String.valueOf(LISTA.getSize()));
+                }
+            }
+            else{
+                    modelo.removeElementAt(n);
+                    LISTA.delete(n);
+                    //ListaCanciones.setSelectedIndex(n-1);
+                    Datos.setText("");
+                    Elementos.setText(String.valueOf(LISTA.getSize()));
+            }
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if (modelo.getSize()>=0){
-                int n = ListaCanciones.getSelectedIndex();
-                modelo.removeElementAt(n);
-                LISTA.delete(n);
-                //ListaCanciones.setSelectedIndex(n-1);
-                Datos.setText("");
-                Elementos.setText(String.valueOf(LISTA.getSize()));
-            }
-            //if (modelo.getSize() >= 0){
-              // Datos.setText("");            
-            //}
     }//GEN-LAST:event_delete_songActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
