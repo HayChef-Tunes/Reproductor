@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
+import org.farng.mp3.id3.AbstractID3v2;
 import org.farng.mp3.id3.ID3v1;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -22,11 +23,14 @@ import org.jaudiotagger.tag.images.Artwork;
  * @author max
  */
 public class Metadatos {
-    String nl = System.getProperty("line.separator");
-
+    String nl = System.getProperty("line.separator");//variable utilizada para saltos de linea
+    /**
+     * Variables que se utilizaran para los distintos metadatos
+     */
     public String Titulo;
     public String Album;
     public String Artista;
+    public String Genero;
     public String Año;
     public String Duración;
     public String ImagenRuta = null;
@@ -41,8 +45,11 @@ public class Metadatos {
         try {
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
-            ID3v1 tag = mp3file.getID3v1Tag();
+            AbstractID3v2 tag = mp3file.getID3v2Tag();
             int duration = 0;
+            /**
+             * Se define el archivo del que se extraera el metadato y los tipos de tags
+             */
         try {
             AudioFile audioFile;
             audioFile = AudioFileIO.read(new File(ruta));
@@ -74,24 +81,25 @@ public class Metadatos {
             ImagenRuta = null;
         }
 
-        Titulo="Titulo: "+tag.getTitle();
-        Album="Album: "+tag.getAlbum();
-        Artista="Artista: "+tag.getArtist();
-        Año="Año: "+tag.getYear();
+        Titulo="Titulo: "+tag.getSongTitle();
+        Album="Album: "+tag.getAlbumTitle();
+        Artista="Artista: "+tag.getLeadArtist();
+        Año="Año: "+tag.getYearReleased();
+        Genero="Genero: "+tag.getSongGenre();
         Duración="Duración: "+duration+"s";
-        
+     /**
+      * Se extraen los distitos metadatos con las funciones get...
+      */   
         } catch (IOException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TagException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return Titulo+nl+Album+nl+Artista+nl+Año+nl+Duración;
+        return Titulo+nl+Album+nl+Artista+nl+Año+nl+Genero+nl+Duración;
     }
-    
     public String getRutaImagen(){
         return ImagenRuta;
-    
     }
     
     public String getArtista(String ruta){
@@ -110,6 +118,11 @@ public class Metadatos {
         }
         return null;
     }
+    /**
+     * Funcion que extrae por separado el artista del audio
+     * @param ruta
+     * @return 
+     */
     public String getTitulo(String ruta){
         String titulo;
         try {
@@ -125,6 +138,31 @@ public class Metadatos {
         }
         return null;
     }
+    /**
+     * Funcion que extrae por separado el titulo del audio
+     * @param ruta
+     * @return 
+     */
+    public String getGenero(String ruta){
+        String genero;
+        try {
+            File sourceFile = new File(ruta);
+            MP3File mp3file = new MP3File(sourceFile);
+            AbstractID3v2 tag = mp3file.getID3v2Tag();
+            genero=tag.getSongGenre();
+            return genero;
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    /**
+     * Funcion que extrae por separado el genero del audio
+     * @param ruta
+     * @return 
+     */
     public String getAlbum(String ruta){
         String album;
         try {
@@ -140,7 +178,9 @@ public class Metadatos {
         }
         return null;
     }
-    
+    /**
+     *Funcion que extrae por separado el Album del audio 
+     */
     public long getSegundos(String ruta){
         try {
             long duration = 0;
@@ -161,4 +201,7 @@ public class Metadatos {
         }
         return 0;
     }
+    /**
+     * Funcion que extrae por separado la duracion del audio
+     */
 }
