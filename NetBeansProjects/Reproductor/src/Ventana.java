@@ -617,7 +617,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
 
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {                                      
         modelo2.clear();
-        Metadatos direccion = new Metadatos();
+        Metadatos direccion = new Metadatos(); 
+        
         for(int i=0;i<LISTA.getSize();i++){
             try {
                 String ruta = LISTA.getElemento(i);
