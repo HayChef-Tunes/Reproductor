@@ -749,7 +749,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton stop;
     private javax.swing.JLabel tiempo;
     // End of variables declaration
-        
+
     public String RutaImagen = null;
     public int contador = 0;
     public String nombre_txt;
