@@ -48,7 +48,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         previous_song = new javax.swing.JButton();
@@ -338,12 +338,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         Etiquetatotalcanciones.getAccessibleContext().setAccessibleName("Canciones en Reproducción:");
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 /**
  * 
  * @param evt 
  */
-    private void add_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_songActionPerformed
+    private void add_songActionPerformed(java.awt.event.ActionEvent evt) {                                         
         JFileChooser dig = new JFileChooser();  //Crea un objeto de dialogo JFileChooser
         dig.setFileFilter(filter);
         int option = dig.showOpenDialog(this);  // Abre la ventana en dialogo
@@ -361,12 +361,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
             
         }
-    }//GEN-LAST:event_add_songActionPerformed
+    }                                        
 /**
  * 
  * @param evt 
  */
-    private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
+    private void playActionPerformed(java.awt.event.ActionEvent evt) {                                     
 
     //String direccion = Ruta;
     int i = ListaCanciones.getSelectedIndex();
@@ -416,14 +416,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 }
             }
             
-    }//GEN-LAST:event_playActionPerformed
+    }                                    
 
 /**
  * 
  * @param evt 
  */
     @SuppressWarnings("empty-statement")
-    private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
+    private void next_songActionPerformed(java.awt.event.ActionEvent evt) {                                          
         try {
                     cancion.Stop();
                     siguiente.stop();
@@ -473,12 +473,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         } 
 
-    }//GEN-LAST:event_next_songActionPerformed
+    }                                         
 /**
  * 
  * @param evt 
  */
-    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
+    private void stopActionPerformed(java.awt.event.ActionEvent evt) {                                     
         try {
             cancion.Stop();
             siguiente.stop();
@@ -489,9 +489,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_stopActionPerformed
+    }                                    
 
-    private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
+    private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {                                            
         try {
             cancion.Stop();
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
@@ -510,9 +510,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             //if (modelo.getSize() >= 0){
               // Datos.setText("");            
             //}
-    }//GEN-LAST:event_delete_songActionPerformed
+    }                                           
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         try {
             // TODO add your handling code here:
             cancion.Stop();
@@ -521,9 +521,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-    private void previous_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previous_songActionPerformed
+    private void previous_songActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
           try {
                 cancion.Stop();
@@ -573,13 +573,13 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 }
             }
         
-    }//GEN-LAST:event_previous_songActionPerformed
+    }                                             
 
-    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
+    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {                                       
         
-    }//GEN-LAST:event_NombreActionPerformed
+    }                                      
 
-    private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
+    private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {                                        
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -598,9 +598,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
          */
-    }//GEN-LAST:event_ArtistaActionPerformed
+    }                                       
 
-    private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
+    private void TituloActionPerformed(java.awt.event.ActionEvent evt) {                                       
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -622,9 +622,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
          */
-    }//GEN-LAST:event_TituloActionPerformed
+    }                                      
 
-    private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
+    private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {                                      
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -646,9 +646,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
          */
-    }//GEN-LAST:event_AlbumActionPerformed
+    }                                     
 
-    private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
+    private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {                                       
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -667,9 +667,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
          */
-    }//GEN-LAST:event_GeneroActionPerformed
+    }                                      
 
-    private void BotonArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonArtistaActionPerformed
+    private void BotonArtistaActionPerformed(java.awt.event.ActionEvent evt) {                                             
         int i = ListaCanciones.getSelectedIndex();
         String elemento=null;
         try {
@@ -687,7 +687,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } catch (TagException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_BotonArtistaActionPerformed
+    }                                            
 
     public static void main(String args[]) {
         try {
@@ -717,7 +717,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     /**
      * Se declaran las variables
      */
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton Album;
     private javax.swing.JButton Artista;
     private javax.swing.JButton BotonArtista;
@@ -748,7 +748,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JSlider progress_bar;
     private javax.swing.JButton stop;
     private javax.swing.JLabel tiempo;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration    
+    
     public String RutaImagen = null;
     public int contador = 0;
     public String nombre_txt;
