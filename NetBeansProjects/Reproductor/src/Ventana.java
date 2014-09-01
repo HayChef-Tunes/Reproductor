@@ -65,6 +65,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         Genero = new javax.swing.JButton();
         progress_bar = new javax.swing.JSlider();
         reloj = new javax.swing.JLabel();
+        Modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -176,6 +177,13 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         reloj.setForeground(new java.awt.Color(254, 254, 254));
         reloj.setText("00:00/00:00");
 
+        Modificar.setText("Modificador");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,7 +213,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                             .addComponent(Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Artista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Album, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Modificar, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +270,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Album)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Genero))
+                                .addComponent(Genero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Modificar))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,6 +334,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     try {
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         elemento = LISTA.getElemento(i);
+                        System.out.println(elemento);
                         String datos=informacion.datos(elemento);
                         Datos.setText(datos);
                         cancion.AbrirFichero(elemento);
@@ -522,27 +534,54 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_NombreActionPerformed
 
     private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
-        modelo2.clear();
-        Metadatos direccion = new Metadatos();
-        for(int i=0;i<LISTA.getSize();i++){
-            try {
-                String ruta = LISTA.getElemento(i);
-                String artista = direccion.getArtista(ruta);
-                String nombre = direccion.getTitulo(ruta);
-                nombre_txt = Nombre.getText();
-                if (artista.equals(nombre_txt)){
-                    modelo2.addElement(nombre);
+        if(modificador==0){
+            modelo2.clear();
+            Metadatos direccion = new Metadatos();
+            for(int i=0;i<LISTA.getSize();i++){
+                try {
+                    String ruta = LISTA.getElemento(i);
+                    String artista = direccion.getArtista(ruta);
+                    String nombre = direccion.getTitulo(ruta);
+                    nombre_txt = Nombre.getText();
+                    if (artista.equals(nombre_txt)){
+                        modelo2.addElement(nombre);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                }
+            /**
+             * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
+             */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+Nombre.getText();
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            }
-        /**
-         * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
-         */
+    }
     }//GEN-LAST:event_ArtistaActionPerformed
 
     private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -564,9 +603,35 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+Nombre.getText();
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_TituloActionPerformed
 
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -588,9 +653,35 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+Nombre.getText();
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_AlbumActionPerformed
 
     private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -609,7 +700,36 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+Nombre.getText();
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_GeneroActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        modificador=1;
+    }//GEN-LAST:event_ModificarActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -650,6 +770,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel ImagenPortada;
     private javax.swing.JList ListaCanciones;
     private DefaultListModel modelo;
+    private javax.swing.JButton Modificar;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton Titulo;
     private javax.swing.JButton add_song;
@@ -675,6 +796,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     Metadatos informacion = null;
     ArrayList LISTA = null;
     Thread siguiente;
+    public int modificador = 0;
     
     public void imagenlabel(){
         if (informacion.getRutaImagen()!=null){
