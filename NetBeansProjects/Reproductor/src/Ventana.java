@@ -202,7 +202,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         progress_bar.setEnabled(false);
 
         tiempo.setForeground(new java.awt.Color(254, 254, 254));
-        tiempo.setText("000");
+        tiempo.setText("00:00/00:00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,42 +235,37 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                             .addComponent(Album, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BotonArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BotonArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(109, 109, 109))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton2)
-                                        .addContainerGap(122, Short.MAX_VALUE))))
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(109, 109, 109))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Etiquetatotalcanciones)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jButton2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(tiempo)
+                                .addComponent(Etiquetatotalcanciones)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tiempo)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -311,14 +306,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(tiempo)
-                        .addGap(21, 21, 21)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(tiempo)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -833,7 +828,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             while(true){
                 while(nexo){
                 progress_bar.setValue(segundero);
-                tiempo.setText(String.valueOf (segundero));
+                tiempo.setText(prog(segundero, (int) segundos));
                 Thread.sleep(1000);
                 segundero++;
                 if (segundero == segundos){
@@ -847,6 +842,111 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String prog(int act, int total){
+        int mins=0;
+        int segs=act;
+        if(act>59 && act<=119){
+            mins=1;
+            segs=segs-60;
+        }
+        if(act>119 && act<=179){
+            mins=2;
+            segs=segs-120;
+        }
+        if(act>179 && act<=239){
+            mins=3;
+            segs=segs-180;
+        }
+        if(act>239 && act<=299){
+            mins=4;
+            segs=segs-240;
+        }
+        if(act>299 && act<=359){
+            mins=5;
+            segs=segs-300;
+        }
+        if(act>359 && act<=419){
+            mins=6;
+            segs=segs-360;
+        }
+        if(act>419 && act<=479){
+            mins=7;
+            segs=segs-420;
+        }
+
+        if(segs<10){
+            return String.valueOf(mins) + ":0" + String.valueOf(segs) + "/" + total(total);
+        }
+        else {
+            return String.valueOf(mins) + ":" + String.valueOf(segs) + "/" + total(total);
+        }
+
+    }
+    
+    public String total(int t){
+
+        String tot="0:00";
+        if(t<10){
+            tot="0:0"+String.valueOf(t);
+        }
+
+        if(t<59){
+            tot="0:"+String.valueOf(t);
+        }
+
+        if(t>59 && t<=119){
+            t=t-60;
+            if(t<10){
+            tot="1:0"+String.valueOf(t);}
+            else{
+            tot="1:"+String.valueOf(t);}
+        }
+        if(t>119 && t<=179){
+            t=t-120;
+            if(t<10){
+            tot="2:0"+String.valueOf(t);}
+            else{
+            tot="2:"+String.valueOf(t);}
+        }
+        if(t>179 && t<=239){
+            t=t-180;
+            if(t<10){
+            tot="3:0"+String.valueOf(t);}
+            else{
+            tot="3:"+String.valueOf(t);}
+        }
+        if(t>239 && t<=299){
+            t=t-240;
+            if(t<10){
+            tot="4:0"+String.valueOf(t);}
+            else{
+            tot="4:"+String.valueOf(t);}
+        }
+        if(t>299 && t<=359){
+            t=t-300;
+            if(t<10){
+            tot="5:0"+String.valueOf(t);}
+            else{
+            tot="5:"+String.valueOf(t);}
+        }
+        if(t>359 && t<=419){
+            t=t-360;
+            if(t<10){
+            tot="6:0"+String.valueOf(t);}
+            else{
+            tot="6:"+String.valueOf(t);}
+        }
+        if(t>419 && t<=479){
+            t=t-420;
+            if(t<10){
+            tot="7:0"+String.valueOf(t);}
+            else{
+            tot="7:"+String.valueOf(t);}
+        }
+        return tot;
+
     }
     
 }
