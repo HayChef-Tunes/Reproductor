@@ -79,6 +79,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         progress_bar = new javax.swing.JSlider();
+        tiempo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -200,6 +201,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         progress_bar.setValue(0);
         progress_bar.setEnabled(false);
 
+        tiempo.setForeground(new java.awt.Color(254, 254, 254));
+        tiempo.setText("000");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,7 +267,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                                 .addGap(27, 27, 27)
                                 .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
+                                .addGap(15, 15, 15)
+                                .addComponent(tiempo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -306,8 +312,13 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tiempo)
+                        .addGap(21, 21, 21)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,6 +433,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Stop();
                     siguiente.stop();
                     progress_bar.setValue(0);
+                    Thread.sleep(1000);
                     cancion = null;
                     cancion = new Reproductor();
                 } catch (Exception ex) {
@@ -522,6 +534,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 cancion.Stop();
                 siguiente.stop();
                 progress_bar.setValue(0);
+                Thread.sleep(1000);
                 cancion = null;
                 cancion = new Reproductor();
             } catch (Exception ex) {
@@ -739,6 +752,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JButton previous_song;
     private javax.swing.JSlider progress_bar;
     private javax.swing.JButton stop;
+    private javax.swing.JLabel tiempo;
     // End of variables declaration//GEN-END:variables
     public String RutaImagen = null;
     public int contador = 0;
@@ -780,7 +794,6 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             try {
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
-                    
                     String datos=informacion.datos(archivo);
                     Datos.setText(datos);
                     cancion.AbrirFichero(archivo);
@@ -820,11 +833,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             while(true){
                 while(nexo){
                 progress_bar.setValue(segundero);
+                tiempo.setText(String.valueOf (segundero));
                 Thread.sleep(1000);
                 segundero++;
                 if (segundero == segundos){
                     progress_bar.setValue(0);
+                    tiempo.setText("0");
                     next();
+                    siguiente.destroy();
                 }
             }
             }
