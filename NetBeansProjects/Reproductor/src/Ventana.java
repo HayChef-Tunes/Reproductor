@@ -26,7 +26,7 @@ import org.jaudiotagger.tag.Tag;
  * Clase Ventana se crea la interfaz del proyecto
  * @author mell
  */
-
+ 
 public class Ventana extends javax.swing.JFrame implements Runnable{
     
     public String Ruta;
