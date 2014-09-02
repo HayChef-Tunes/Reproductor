@@ -35,7 +35,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(0,0,0));
         Elementos.setText(String.valueOf(LISTA.getSize()));
-        
+        modificar_on.setVisible(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -68,6 +68,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         reloj = new javax.swing.JLabel();
         Modificar = new javax.swing.JButton();
         VaciarLista = new javax.swing.JButton();
+        modificar_on = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -193,6 +194,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         });
 
+        modificar_on.setBackground(new java.awt.Color(254, 250, 246));
+        modificar_on.setForeground(new java.awt.Color(254, 254, 254));
+        modificar_on.setText("Modoficador Activado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -224,7 +229,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                             .addComponent(Album, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Modificar, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificar_on))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -270,13 +276,15 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
-                                .addComponent(Artista))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Artista)
+                                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(modificar_on)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(Titulo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Album)
@@ -284,7 +292,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                                 .addComponent(Genero)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Modificar))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,9 +424,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                  * Se agregan las canciones al recuadro de playlist
                  */
             try {
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
-                    
                     String datos=informacion.datos(archivo);
                     Datos.setText(datos);
                     cancion.AbrirFichero(archivo);
@@ -428,6 +436,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
+                    contador =1;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -441,6 +450,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                  * Se agregan las canciones al recuadro de playlist
                  */
             try {
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                     ListaCanciones.setSelectedIndex(n+1);
                     archivo = LISTA.getElemento(n+1);
                     String datos=informacion.datos(archivo);
@@ -452,6 +462,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
+                    contador =1;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -582,6 +593,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                  * Se agregan las canciones al recuadro de playlist
                  */
                 try {
+                        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         ListaCanciones.setSelectedIndex(n-1);
                         archivo = LISTA.getElemento(n-1);
                         String datos=informacion.datos(archivo);
@@ -593,6 +605,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         progress_bar.setMaximum((int) segundos);
                         siguiente = new Thread (this);
                         siguiente.start();
+                        contador =1;
                 } catch (Exception ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -604,18 +617,19 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                  * Se agregan las canciones al recuadro de playlist
                  */
             try {
-                        ListaCanciones.setSelectedIndex(LISTA.getSize()-1);
-                        archivo = LISTA.getElemento(LISTA.getSize()-1);
-                        String datos=informacion.datos(archivo);
-                        Datos.setText(datos);
-                        cancion.AbrirFichero(archivo);
-                        imagenlabel();
-                        cancion.Play();
-                        segundos = informacion.getSegundos(archivo);
-                        progress_bar.setMaximum((int) segundos);
-                        siguiente = new Thread (this);
-                        siguiente.start();
-
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
+                    ListaCanciones.setSelectedIndex(LISTA.getSize()-1);
+                    archivo = LISTA.getElemento(LISTA.getSize()-1);
+                    String datos=informacion.datos(archivo);
+                    Datos.setText(datos);
+                    cancion.AbrirFichero(archivo);
+                    imagenlabel();
+                    cancion.Play();
+                    segundos = informacion.getSegundos(archivo);
+                    progress_bar.setMaximum((int) segundos);
+                    siguiente = new Thread (this);
+                    siguiente.start();
+                    contador =1;
                 } catch (Exception ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -668,6 +682,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 artista="Artista: "+Nombre.getText();
                 Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
                 modificador=0;
+                modificar_on.setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -718,6 +733,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 artista="Artista: "+informacion.getArtista(elemento);
                 Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
                 modificador=0;
+                modificar_on.setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -768,6 +784,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 artista="Artista: "+informacion.getArtista(elemento);
                 Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
                 modificador=0;
+                modificar_on.setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -815,6 +832,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 artista="Artista: "+informacion.getArtista(elemento);
                 Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
                 modificador=0;
+                modificar_on.setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -823,6 +841,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         modificador=1;
+        modificar_on.setVisible(true);
     }//GEN-LAST:event_ModificarActionPerformed
 
     public static void main(String args[]) {
@@ -875,6 +894,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaBuscador;
     private DefaultListModel modelo2;
+    private javax.swing.JLabel modificar_on;
     public javax.swing.JButton next_song;
     private javax.swing.JButton play;
     private javax.swing.JButton previous_song;
@@ -920,9 +940,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         int n = ListaCanciones.getSelectedIndex();
         if (n+1 == LISTA.getSize()){
             try {
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
-                    
                     String datos=informacion.datos(archivo);
                     Datos.setText(datos);
                     cancion.AbrirFichero(archivo);
@@ -932,6 +952,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
+                    contador =1;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -939,6 +960,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         }
         else{    
             try {
+                    play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                     ListaCanciones.setSelectedIndex(n+1);
                     archivo = LISTA.getElemento(n+1);
                     String datos=informacion.datos(archivo);
@@ -950,6 +972,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
+                    contador =1;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
