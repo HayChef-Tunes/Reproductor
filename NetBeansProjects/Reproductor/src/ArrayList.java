@@ -79,7 +79,9 @@ class ArrayList {
 		}
 		return "";
 	}
-        
+        /**
+         * Limpia el arreglo
+         */
         public void Clear(){
             this.size = 0;
         }
