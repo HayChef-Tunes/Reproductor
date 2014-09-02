@@ -476,6 +476,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
              */
             if (cancionsonando ==  LISTA.getElemento(n)){
                 try {
+                    /**
+                     * Sila ruta cancionsonando es igual a el elemento obtenido
+                     * de la lista entonces la musica se detiene y borra el 
+                     * que se encuentra sonando en ese momento
+                     */
                     cancion.Stop();
                     play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                     ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/barras.png")));
