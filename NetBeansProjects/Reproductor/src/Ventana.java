@@ -477,6 +477,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         try {
             cancion.Stop();
             siguiente.stop();
+            progress_bar.setValue(0);
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
             contador = 0;
