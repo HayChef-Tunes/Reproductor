@@ -85,7 +85,12 @@ class ArrayList {
         public void Clear(){
             this.size = 0;
         }
-
+        
+        /**
+         * Borra un elemento de el arreglo, recibe un indice y en esa posicion lo 
+         * compara un for y el indice que ingreso.
+         * @param e 
+         */
 	public void delete (int e) {
 		for (int i=0; i <= this.size; i++) {
 			if (arreglo[i] == arreglo[e]) {
