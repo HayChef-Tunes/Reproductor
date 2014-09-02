@@ -497,6 +497,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 }
             }
             else{
+                /**
+                 * Si la ruta de cancionsonando es distinta a la que esta en 
+                 * reproduccion entonces se remueve el elemento sin detener la 
+                 * musica 
+                 */
                     modelo.removeElementAt(n);
                     LISTA.delete(n);
                     //ListaCanciones.setSelectedIndex(n-1);
