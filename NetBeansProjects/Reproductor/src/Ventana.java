@@ -462,11 +462,18 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_stopActionPerformed
-
+    /**
+     * Metodo para eliminar canción de la playlist
+     * @param evt 
+     */
     private void delete_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_songActionPerformed
         int n = ListaCanciones.getSelectedIndex();
+        
         try {
-
+            /**
+             * Condicion por si la cancion que se va a eliminar es la que esta 
+             * reproduciendo en ese momento
+             */
             if (cancionsonando ==  LISTA.getElemento(n)){
                 try {
                     cancion.Stop();
