@@ -401,7 +401,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 /**
                  * Toma el select que tiene el mouse y declara archivo como String
                  * toma el select y le suma 1 para abrir ese archivo.
-                 * 
+                 * Se agregan las canciones al recuadro de playlist
                  */
             try {
                     ListaCanciones.setSelectedIndex(0);
@@ -426,6 +426,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                  *Si n mas 1 es mayor al size entonces la lista de reproduccion
                  * inicia de nuevo entonces empieza a reproducir la primera 
                  * canción
+                 * Se agregan las canciones al recuadro de playlist
                  */
             try {
                     ListaCanciones.setSelectedIndex(n+1);
@@ -538,7 +539,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 /**
                  * Toma el select que tiene el mouse y declara archivo como String
                  * toma el select y le resta 1 para abrir ese archivo.
-                 * 
+                 * Se agregan las canciones al recuadro de playlist
                  */
                 try {
                         ListaCanciones.setSelectedIndex(n-1);
@@ -560,7 +561,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 /**
                  * Toma el select que tiene y si es -1 selecciona y reproduce 
                  * la ultima canción.
-                 * 
+                 * Se agregan las canciones al recuadro de playlist
                  */
             try {
                         ListaCanciones.setSelectedIndex(LISTA.getSize()-1);
