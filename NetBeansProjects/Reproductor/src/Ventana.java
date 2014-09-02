@@ -543,6 +543,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             LISTA.Clear();
             cancion.Stop();
             siguiente.stop();
+            progress_bar.setMaximum(0);
             contador = 0;
             Datos.setText("");
             modelo.removeAllElements();
