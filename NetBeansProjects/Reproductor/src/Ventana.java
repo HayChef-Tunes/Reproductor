@@ -533,6 +533,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+            play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
+            ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
+            LISTA.Clear();
             cancion.Stop();
             Datos.setText("");
             modelo.removeAllElements();
