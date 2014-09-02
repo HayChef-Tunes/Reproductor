@@ -64,7 +64,13 @@ class ArrayList {
             }
                 return null;
         }
-
+        
+        /**
+         * Busca un la direccion en el arreglo, recibe un string.
+         * Recorre todo el arreglo con el for en el i, y lo compara con e.
+         * @param e
+         * @return 
+         */
 	public String find (String e) {
 		for (int i=0; i < this.size; i++) {
 			if (e == arreglo[i]) {
