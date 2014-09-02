@@ -542,6 +542,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
             LISTA.Clear();
             cancion.Stop();
+            contador = 0;
             Datos.setText("");
             modelo.removeAllElements();
         } catch (Exception ex) {
