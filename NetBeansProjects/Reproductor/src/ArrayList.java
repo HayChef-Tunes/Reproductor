@@ -4,6 +4,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 class ArrayList {
     /**
      * Declaracion de variables a utilizar
+     * @author kevin clasede ArrayList
      */
 	private int size;
         
