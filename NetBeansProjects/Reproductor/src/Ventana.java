@@ -498,8 +498,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * @author kevin clase previous
+     */
     private void previous_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previous_songActionPerformed
         // TODO add your handling code here:
+        /**
+         * Detiene la canción declara canción null, y crea una nueva instancia.
+         */
           try {
                 cancion.Stop();
                 siguiente.stop();
@@ -508,6 +514,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
+          /**
+           * Toma el select que tiene el mouse y declara archivo como String
+           * toma el select y le resta 1 para abrir ese archivo.
+           * 
+           */
             int n = ListaCanciones.getSelectedIndex();
             String archivo;
             if (n-1 != -1){
@@ -528,6 +539,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 }
             }
             else{
+                /**
+                 * Toma el select que tiene y si es -1 selecciona y reproduce 
+                 * la ultima canción.
+                 * 
+                 */
             try {
                         ListaCanciones.setSelectedIndex(LISTA.getSize()-1);
                         archivo = LISTA.getElemento(LISTA.getSize()-1);
