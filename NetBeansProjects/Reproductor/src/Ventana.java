@@ -384,6 +384,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
  */
     @SuppressWarnings("empty-statement")
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
+        /**
+         * Detiene la canción declara canción null, y crea una nueva instancia.
+         */
         try {
                     cancion.Stop();
                     siguiente.stop();
@@ -395,6 +398,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         String archivo;
         int n = ListaCanciones.getSelectedIndex();
         if (n+1 == LISTA.getSize()){
+            
             try {
                     ListaCanciones.setSelectedIndex(0);
                     archivo = LISTA.getElemento(0);
