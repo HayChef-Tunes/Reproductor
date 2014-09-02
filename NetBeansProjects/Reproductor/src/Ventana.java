@@ -2,25 +2,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.farng.mp3.AbstractMP3Tag;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 import org.farng.mp3.id3.AbstractID3v2;
-import org.farng.mp3.id3.ID3v1;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.tag.FieldDataInvalidException;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.KeyNotFoundException;
-import org.jaudiotagger.tag.Tag;
 
 /**
  * Clase Ventana se crea la interfaz del proyecto
@@ -74,11 +64,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         Titulo = new javax.swing.JButton();
         Album = new javax.swing.JButton();
         Genero = new javax.swing.JButton();
-        DatoNuevo = new javax.swing.JTextField();
-        BotonArtista = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        progress_bar = new javax.swing.JSlider();
+        reloj = new javax.swing.JLabel();
+        Modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -184,18 +172,18 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         });
 
-        BotonArtista.setText("Artista");
-        BotonArtista.addActionListener(new java.awt.event.ActionListener() {
+        progress_bar.setValue(0);
+        progress_bar.setEnabled(false);
+
+        reloj.setForeground(new java.awt.Color(254, 254, 254));
+        reloj.setText("00:00/00:00");
+
+        Modificar.setText("Modificador");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonArtistaActionPerformed(evt);
+                ModificarActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Genero");
-
-        jButton3.setText("Album");
-
-        jButton4.setText("Titulo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,91 +214,83 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                             .addComponent(Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Artista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Album, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(Genero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Modificar, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(1, 1, 1)
                         .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotonArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Etiquetatotalcanciones)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(reloj))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Etiquetatotalcanciones)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(HayChefTunes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(next_song, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(delete_song, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(add_song, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(previous_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(Artista))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(Titulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Album)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Genero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Modificar))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ImagenPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(progress_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(reloj)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Etiquetatotalcanciones)
-                            .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(DatoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BotonArtista)
-                            .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(HayChefTunes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(next_song, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(delete_song, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(play, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(add_song, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(previous_song, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(Artista)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Titulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Album)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Genero)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                            .addComponent(Elementos, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Etiquetatotalcanciones.getAccessibleContext().setAccessibleName("Canciones en Reproducción:");
@@ -355,6 +335,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     try {
                         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/pause.png")));
                         elemento = LISTA.getElemento(i);
+                        System.out.println(elemento);
                         String datos=informacion.datos(elemento);
                         cancionsonando = elemento;
                         Datos.setText(datos);
@@ -363,6 +344,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         cancion.Play();
                         contador=1;
                         segundos = informacion.getSegundos(elemento);
+                        progress_bar.setMaximum((int) segundos);
                         siguiente = new Thread (this);
                         siguiente.start();
                     } catch (Exception ex) {
@@ -423,6 +405,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     imagenlabel();
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
+                    progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
             } catch (Exception ex) {
@@ -439,6 +422,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.AbrirFichero(archivo);
                     imagenlabel();
                     cancion.Play();
+                    segundos = informacion.getSegundos(archivo);
+                    progress_bar.setMaximum((int) segundos);
+                    siguiente = new Thread (this);
+                    siguiente.start();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -533,6 +520,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         imagenlabel();
                         cancion.Play();
                         segundos = informacion.getSegundos(archivo);
+                        progress_bar.setMaximum((int) segundos);
                         siguiente = new Thread (this);
                         siguiente.start();
                 } catch (Exception ex) {
@@ -548,6 +536,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         cancion.AbrirFichero(archivo);
                         imagenlabel();
                         cancion.Play();
+                        segundos = informacion.getSegundos(archivo);
+                        progress_bar.setMaximum((int) segundos);
+                        siguiente = new Thread (this);
+                        siguiente.start();
 
                 } catch (Exception ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -561,27 +553,54 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_NombreActionPerformed
 
     private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
-        modelo2.clear();
-        Metadatos direccion = new Metadatos();
-        for(int i=0;i<LISTA.getSize();i++){
-            try {
-                String ruta = LISTA.getElemento(i);
-                String artista = direccion.getArtista(ruta);
-                String nombre = direccion.getTitulo(ruta);
-                nombre_txt = Nombre.getText();
-                if (artista.equals(nombre_txt)){
-                    modelo2.addElement(nombre);
+        if(modificador==0){
+            modelo2.clear();
+            Metadatos direccion = new Metadatos();
+            for(int i=0;i<LISTA.getSize();i++){
+                try {
+                    String ruta = LISTA.getElemento(i);
+                    String artista = direccion.getArtista(ruta);
+                    String nombre = direccion.getTitulo(ruta);
+                    nombre_txt = Nombre.getText();
+                    if (artista.equals(nombre_txt)){
+                        modelo2.addElement(nombre);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                }
+            /**
+             * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
+             */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+Nombre.getText();
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-            }
-        /**
-         * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
-         */
+    }
     }//GEN-LAST:event_ArtistaActionPerformed
 
     private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -603,9 +622,35 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+Nombre.getText();
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_TituloActionPerformed
 
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -627,9 +672,35 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+informacion.getGenero(elemento);
+                album="Album: "+Nombre.getText();
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_AlbumActionPerformed
 
     private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
+        if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
         for(int i=0;i<LISTA.getSize();i++){
@@ -648,27 +719,36 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         /**
          * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
          */
+        }
+        else{
+            try {
+                int i = ListaCanciones.getSelectedIndex();
+                String elemento;
+                String genero;
+                String titulo;
+                String album;
+                String duracion;
+                String año;
+                String artista;
+                String nl = System.getProperty("line.separator");
+                elemento = LISTA.getElemento(i);
+                genero="Genero: "+Nombre.getText();
+                album="Album: "+informacion.getAlbum(elemento);
+                titulo="Titulo: "+informacion.getTitulo(elemento);
+                año="Año: "+informacion.getAño(elemento);
+                duracion="Duracion: "+String.valueOf(informacion.getSegundos(elemento));
+                artista="Artista: "+informacion.getArtista(elemento);
+                Datos.setText(titulo+nl+album+nl+artista+nl+año+nl+genero+nl+duracion+"s");
+                modificador=0;
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     }//GEN-LAST:event_GeneroActionPerformed
 
-    private void BotonArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonArtistaActionPerformed
-        int i = ListaCanciones.getSelectedIndex();
-        String elemento=null;
-        try {
-            elemento=LISTA.getElemento(i);
-        } catch (Exception ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            File sourceFile = new File(elemento);
-            MP3File mp3file = new MP3File(sourceFile);
-            AbstractID3v2 tag = mp3file.getID3v2Tag();
-            tag.setSongGenre(DatoNuevo.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TagException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonArtistaActionPerformed
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        modificador=1;
+    }//GEN-LAST:event_ModificarActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -701,8 +781,6 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Album;
     private javax.swing.JButton Artista;
-    private javax.swing.JButton BotonArtista;
-    private javax.swing.JTextField DatoNuevo;
     private javax.swing.JTextArea Datos;
     private javax.swing.JLabel Elementos;
     private javax.swing.JLabel Etiquetatotalcanciones;
@@ -711,13 +789,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel ImagenPortada;
     private javax.swing.JList ListaCanciones;
     private DefaultListModel modelo;
+    private javax.swing.JButton Modificar;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton Titulo;
     private javax.swing.JButton add_song;
     private javax.swing.JButton delete_song;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -726,6 +802,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     public javax.swing.JButton next_song;
     private javax.swing.JButton play;
     private javax.swing.JButton previous_song;
+    private javax.swing.JSlider progress_bar;
+    private javax.swing.JLabel reloj;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
     public String RutaImagen = null;
@@ -737,6 +815,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     Metadatos informacion = null;
     ArrayList LISTA = null;
     Thread siguiente;
+    public int modificador = 0;
     
     public void imagenlabel(){
         if (informacion.getRutaImagen()!=null){
@@ -773,6 +852,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.AbrirFichero(archivo);
                     imagenlabel();
                     cancion.Play();
+                    segundos = informacion.getSegundos(archivo);
+                    progress_bar.setMaximum((int) segundos);
+                    siguiente = new Thread (this);
+                    siguiente.start();
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -788,6 +871,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     imagenlabel();
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
+                    progress_bar.setMaximum((int) segundos);
                     siguiente = new Thread (this);
                     siguiente.start();
             } catch (Exception ex) {
@@ -801,17 +885,125 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             int segundero = 0;
             while(true){
                 while(nexo){
+                progress_bar.setValue(segundero);
+                reloj.setText(prog(segundero, (int) segundos));
                 Thread.sleep(1000);
                 segundero++;
                 if (segundero == segundos){
+                    progress_bar.setValue(0);
                     next();
+                    siguiente.destroy();
                 }
-               segundero = segundero;
             }
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String prog(int act, int total){
+        int mins=0;
+        int segs=act;
+        if(act>59 && act<=119){
+            mins=1;
+            segs=segs-60;
+        }
+        if(act>119 && act<=179){
+            mins=2;
+            segs=segs-120;
+        }
+        if(act>179 && act<=239){
+            mins=3;
+            segs=segs-180;
+        }
+        if(act>239 && act<=299){
+            mins=4;
+            segs=segs-240;
+        }
+        if(act>299 && act<=359){
+            mins=5;
+            segs=segs-300;
+        }
+        if(act>359 && act<=419){
+            mins=6;
+            segs=segs-360;
+        }
+        if(act>419 && act<=479){
+            mins=7;
+            segs=segs-420;
+        }
+
+        if(segs<10){
+            return String.valueOf(mins) + ":0" + String.valueOf(segs) + "/" + total(total);
+        }
+        else {
+            return String.valueOf(mins) + ":" + String.valueOf(segs) + "/" + total(total);
+        }
+
+    }
+    
+    public String total(int t){
+
+        String tot="0:00";
+        if(t<10){
+            tot="0:0"+String.valueOf(t);
+        }
+
+        if(t<59){
+            tot="0:"+String.valueOf(t);
+        }
+
+        if(t>59 && t<=119){
+            t=t-60;
+            if(t<10){
+            tot="1:0"+String.valueOf(t);}
+            else{
+            tot="1:"+String.valueOf(t);}
+        }
+        if(t>119 && t<=179){
+            t=t-120;
+            if(t<10){
+            tot="2:0"+String.valueOf(t);}
+            else{
+            tot="2:"+String.valueOf(t);}
+        }
+        if(t>179 && t<=239){
+            t=t-180;
+            if(t<10){
+            tot="3:0"+String.valueOf(t);}
+            else{
+            tot="3:"+String.valueOf(t);}
+        }
+        if(t>239 && t<=299){
+            t=t-240;
+            if(t<10){
+            tot="4:0"+String.valueOf(t);}
+            else{
+            tot="4:"+String.valueOf(t);}
+        }
+        if(t>299 && t<=359){
+            t=t-300;
+            if(t<10){
+            tot="5:0"+String.valueOf(t);}
+            else{
+            tot="5:"+String.valueOf(t);}
+        }
+        if(t>359 && t<=419){
+            t=t-360;
+            if(t<10){
+            tot="6:0"+String.valueOf(t);}
+            else{
+            tot="6:"+String.valueOf(t);}
+        }
+        if(t>419 && t<=479){
+            t=t-420;
+            if(t<10){
+            tot="7:0"+String.valueOf(t);}
+            else{
+            tot="7:"+String.valueOf(t);}
+        }
+        return tot;
+
     }
     
 }

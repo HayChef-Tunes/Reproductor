@@ -129,7 +129,7 @@ public class Metadatos {
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
             ID3v1 tag = mp3file.getID3v1Tag();
-            titulo=tag.getTitle();
+            titulo=tag.getSongTitle();
             return titulo;
         } catch (IOException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,13 +163,28 @@ public class Metadatos {
      * @param ruta
      * @return 
      */
+    public String getAño(String ruta){
+        String Año;
+        try {
+            File sourceFile = new File(ruta);
+            MP3File mp3file = new MP3File(sourceFile);
+            AbstractID3v2 tag = mp3file.getID3v2Tag();
+            Año=tag.getYearReleased();
+            return Año;
+        } catch (IOException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TagException ex) {
+            Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public String getAlbum(String ruta){
         String album;
         try {
             File sourceFile = new File(ruta);
             MP3File mp3file = new MP3File(sourceFile);
             ID3v1 tag = mp3file.getID3v1Tag();
-            album=tag.getAlbum();
+            album=tag.getAlbumTitle();
             return album;
         } catch (IOException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
