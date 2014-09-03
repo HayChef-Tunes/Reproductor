@@ -22,7 +22,7 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
-/**
+/**Clase de Metadatos encargada de sacar los metadatos de los mp3
  * @author max
  */
 public class Metadatos {
@@ -31,41 +31,21 @@ public class Metadatos {
      * Variables que se utilizaran para los distintos metadatos
      */
     public String Titulo;
-
-    /**
-     *
-     */
     public String Album;
-
-    /**
-     *
-     */
     public String Artista;
-
-    /**
-     * 
-     */
     public String Genero;
-
-    /**
-     *
-     */
     public String Año;
-
-    /**
-     *
-     */
     public String Duración;
 
     /**
-     *
+     * Se declaran las variables a utilizar para la caratula del album del mp3 que se reproduce
      */
     public String ImagenRuta = null;
     private Tag etiquetas;
     private Artwork Portada;
     /**
      *
-     * @param ruta
+     * @param ruta (del archivo mp3)
      * @return
      * @throws java.lang.Exception
      */
@@ -86,7 +66,14 @@ public class Metadatos {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Portada=etiquetas.getFirstArtwork();
+        /**
+         * En esta parte del codigo se saca la imagen del mp3, 
+         * luego se crea en una BufferedImage, se recorta la imagen 
+         * y finalmente la gurdamos en la misma ruta del mp3,
+         * por lo tanto se guarda en una variable la ruta de la imagen para despues
+         * en la interfaz (Class Ventana) solo abrir la imagen y colocarla en el label
+         */
+        Portada = etiquetas.getFirstArtwork();
         if (Portada != null){
             InputStream entradadatos = new ByteArrayInputStream (Portada.getBinaryData());
 
@@ -128,7 +115,7 @@ public class Metadatos {
     }
     
     /**
-     *
+     * Metodo para adquirir la ruta de la imagen de la caratura del album del mp3, la cual esta almacenada en la variable ImagenRuta
      * @return
      */
     public String getRutaImagen(){

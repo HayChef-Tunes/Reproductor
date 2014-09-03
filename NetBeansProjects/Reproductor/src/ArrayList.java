@@ -16,6 +16,7 @@ class ArrayList {
 	private final int MAX_SIZE = 777;
 
         /**
+         * Constructor de la clase
          * Se declara el valor de las variables que hacen falta 
          */
 	public ArrayList () {
@@ -24,10 +25,9 @@ class ArrayList {
 		this.maxSize = MAX_SIZE;
 		this.arreglo = new String[this.maxSize];
 	}
-
         /**
-         * Agregar elementos al arreglo con la condición sea menor al maximo la lista 
-         * sino que tire error
+         * Agregar elementos al arreglo con la condición sea menor al maximo la lista, sino que tire error
+         * @param direccionDeElemento (ruta del elemento agregado)
          */
 	public void add (String direccionDeElemento) {
 
@@ -53,7 +53,7 @@ class ArrayList {
          * menor o igual a size
          * 
          * 
-         * @param indice
+         * @param indice seleccion en la Playlist
          * @return elemento que se encuentra en el indice
          * @throws Exception 
          */
@@ -72,7 +72,7 @@ class ArrayList {
         /**
          * Busca un la direccion en el arreglo, recibe un string.
          * Recorre todo el arreglo con el for en el i, y lo compara con e.
-         * @param direccion
+         * @param direccion ruta que se agrega del PLaylist
          * @return Sie el elemento buscado se encuentra en el ArrayList
          */
 	public String find (String direccion) {
