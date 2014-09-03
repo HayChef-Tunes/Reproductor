@@ -685,6 +685,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+        /**
+         * Funcion que cambia el metadato de Artista por el introducido
+         */
     }//GEN-LAST:event_ArtistaActionPerformed
 
     private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
@@ -736,6 +739,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+        /**
+         * Funcion que cambia el metadato de Titulo por el introducido
+         */
     }//GEN-LAST:event_TituloActionPerformed
 
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
@@ -787,6 +793,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+        /**
+         * Funcion que cambia el metadato de Album por el introducido
+         */
     }//GEN-LAST:event_AlbumActionPerformed
 
     private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
@@ -835,11 +844,17 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+        /**
+         * Funcion que cambia el metadato de Genero por el introducido
+         */
     }//GEN-LAST:event_GeneroActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         modificador=1;
         modificar_on.setVisible(true);
+        /**
+         * Funcion habilita la modificacion de datos en los botones artista, album, genero y titulo
+         */
     }//GEN-LAST:event_ModificarActionPerformed
 
     public static void main(String args[]) {
