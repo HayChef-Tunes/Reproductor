@@ -14,6 +14,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Ventana extends javax.swing.JFrame implements Runnable{
     
+    /**
+     *
+     */
     public String Ruta;
     private String cancionsonando = "";
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
@@ -857,6 +860,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
          */
     }//GEN-LAST:event_ModificarActionPerformed
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -915,17 +922,44 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel reloj;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
-    public String RutaImagen = null;
+
+    /**
+     *
+     */
+        public String RutaImagen = null;
+
+    /**
+     *
+     */
     public int contador = 0;
+
+    /**
+     *
+     */
     public String nombre_txt;
+
+    /**
+     *
+     */
     public long segundos;
+
+    /**
+     *
+     */
     public boolean nexo = true;
     Reproductor cancion = null;
     Metadatos informacion = null;
     ArrayList LISTA = null;
     Thread siguiente;
+
+    /**
+     *
+     */
     public int modificador = 0;
     
+    /**
+     *
+     */
     public void imagenlabel(){
         if (informacion.getRutaImagen()!=null){
             RutaImagen=informacion.getRutaImagen();
@@ -941,6 +975,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         }
     }
     
+    /**
+     *
+     */
     public void next(){
         try {
                     cancion.Stop();
@@ -1013,6 +1050,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         }
     }
     
+    /**
+     *
+     * @param act
+     * @param total
+     * @return
+     */
     public String prog(int act, int total){
         int mins=0;
         int segs=act;
@@ -1054,6 +1097,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
 
     }
     
+    /**
+     *
+     * @param t
+     * @return
+     */
     public String total(int t){
 
         String tot="0:00";
