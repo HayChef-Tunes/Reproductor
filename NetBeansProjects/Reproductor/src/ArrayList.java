@@ -72,7 +72,7 @@ class ArrayList {
         /**
          * Busca un la direccion en el arreglo, recibe un string.
          * Recorre todo el arreglo con el for en el i, y lo compara con e.
-         * @param e
+         * @param direccion
          * @return Sie el elemento buscado se encuentra en el ArrayList
          */
 	public String find (String direccion) {
@@ -93,7 +93,7 @@ class ArrayList {
         /**
          * Borra un elemento de el arreglo, recibe un indice y en esa posicion lo 
          * compara un for y el indice que ingreso.
-         * @param e 
+         * @param seleccion 
          */
 	public void delete (int seleccion) {
 		for (int i=0; i <= this.size; i++) {
