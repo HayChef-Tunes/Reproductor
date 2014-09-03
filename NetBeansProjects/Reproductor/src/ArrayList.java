@@ -1,6 +1,9 @@
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
+    /**
+     * @author kevin clase de ArrayList
+     */
 class ArrayList {
     /**
      * Declaracion de variables a utilizar
@@ -26,10 +29,10 @@ class ArrayList {
          * Agregar elementos al arreglo con la condición sea menor al maximo la lista 
          * sino que tire error
          */
-	public void add (String e) {
+	public void add (String direccionDeElemento) {
 
 		if (this.size < this.maxSize) {
-			this.arreglo [this.size] = e;
+			this.arreglo [this.size] = direccionDeElemento;
 			this.size ++;
 		}
 		else {
@@ -37,8 +40,8 @@ class ArrayList {
 		}
 	}
         /**
-         * Retorna el tamaño de la lista por medio del size
-         * @return 
+         * Metodo getzise que cambia con cada elemento agregado
+         * @return el tamaño de la lista por medio del size
          */
 	public int getSize () {
 		return this.size;
@@ -51,7 +54,7 @@ class ArrayList {
          * 
          * 
          * @param indice
-         * @return
+         * @return elemento que se encuentra en el indice
          * @throws Exception 
          */
 	public String getElemento (int indice) throws Exception {
@@ -70,11 +73,11 @@ class ArrayList {
          * Busca un la direccion en el arreglo, recibe un string.
          * Recorre todo el arreglo con el for en el i, y lo compara con e.
          * @param e
-         * @return 
+         * @return Sie el elemento buscado se encuentra en el ArrayList
          */
-	public String find (String e) {
+	public String find (String direccion) {
 		for (int i=0; i < this.size; i++) {
-			if (e == arreglo[i]) {
+			if (direccion == arreglo[i]) {
 				return "FIND";
 			}
 		}
@@ -92,10 +95,10 @@ class ArrayList {
          * compara un for y el indice que ingreso.
          * @param e 
          */
-	public void delete (int e) {
+	public void delete (int seleccion) {
 		for (int i=0; i <= this.size; i++) {
-			if (arreglo[i] == arreglo[e]) {
-                                arreglo[e] = arreglo[++i];
+			if (arreglo[i] == arreglo[seleccion]) {
+                                arreglo[seleccion] = arreglo[++i];
                                 --this.size;
                                 
 				}
