@@ -23,7 +23,6 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
 /**
- * Constructor de la clase 
  * @author max
  */
 public class Metadatos {
@@ -32,11 +31,35 @@ public class Metadatos {
      * Variables que se utilizaran para los distintos metadatos
      */
     public String Titulo;
+
+    /**
+     *
+     */
     public String Album;
+
+    /**
+     *
+     */
     public String Artista;
+
+    /**
+     * 
+     */
     public String Genero;
+
+    /**
+     *
+     */
     public String Año;
+
+    /**
+     *
+     */
     public String Duración;
+
+    /**
+     *
+     */
     public String ImagenRuta = null;
     private Tag etiquetas;
     private Artwork Portada;
@@ -44,6 +67,7 @@ public class Metadatos {
      *
      * @param ruta
      * @return
+     * @throws java.lang.Exception
      */
     public String datos (String ruta) throws Exception{
         try {
@@ -103,10 +127,19 @@ public class Metadatos {
         return Titulo+nl+Album+nl+Artista+nl+Año+nl+Genero+nl+Duración;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getRutaImagen(){
         return ImagenRuta;
     }
     
+    /**
+     *
+     * @param ruta
+     * @return
+     */
     public String getArtista(String ruta){
         String artista;
         try {
@@ -183,6 +216,12 @@ public class Metadatos {
         }
         return null;
     }
+
+    /**
+     *
+     * @param ruta
+     * @return
+     */
     public String getAlbum(String ruta){
         String album;
         try {
@@ -200,6 +239,8 @@ public class Metadatos {
     }
     /**
      *Funcion que extrae por separado el Album del audio 
+     * @param ruta
+     * @return 
      */
     public long getSegundos(String ruta){
         try {
