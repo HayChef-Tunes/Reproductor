@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -8,9 +6,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
-import org.farng.mp3.id3.AbstractID3v2;
 
 /**
  * Clase Ventana se crea la interfaz del proyecto
@@ -478,6 +473,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             cancion.Stop();
             siguiente.stop();
             progress_bar.setValue(0);
+            reloj.setText("00:00/00:00");
             play.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/play.png")));
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
             contador = 0;
@@ -554,11 +550,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             ImagenPortada.setIcon(new javax.swing.ImageIcon(getClass().getResource("Imagenes/iconos/barras.png")));
             LISTA.Clear();
             cancion.Stop();
-            siguiente.stop();
             progress_bar.setMaximum(0);
             contador = 0;
             Datos.setText("");
+            Elementos.setText("0");
             modelo.removeAllElements();
+            siguiente.stop();
         } catch (Exception ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }

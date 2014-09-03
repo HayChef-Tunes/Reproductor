@@ -13,9 +13,9 @@ class ArrayList {
 	private final int MAX_SIZE = 777;
 
         /**
-         *se declara el valor de las variables que hacen falta 
+         * Se declara el valor de las variables que hacen falta 
          */
-	ArrayList () {
+	public ArrayList () {
             
 		this.size = 0;
 		this.maxSize = MAX_SIZE;

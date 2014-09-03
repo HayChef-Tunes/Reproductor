@@ -1,3 +1,7 @@
+/**
+ * Se cargan las librerias necesarias para que todo el código funcione a la perfección
+ */
+
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -19,7 +23,7 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
 /**
- *
+ * Constructor de la clase 
  * @author max
  */
 public class Metadatos {
@@ -98,6 +102,7 @@ public class Metadatos {
 
         return Titulo+nl+Album+nl+Artista+nl+Año+nl+Genero+nl+Duración;
     }
+    
     public String getRutaImagen(){
         return ImagenRuta;
     }
