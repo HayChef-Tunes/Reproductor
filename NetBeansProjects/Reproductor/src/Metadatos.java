@@ -64,9 +64,9 @@ public class Metadatos {
     private Tag etiquetas;
     private Artwork Portada;
     /**
-     *
+     * Funcion que extrae la imagen, la duracion y otros metadatos de los archivos 
      * @param ruta
-     * @return
+     * @return Los metadatos de el archivo
      * @throws java.lang.Exception
      */
     public String datos (String ruta) throws Exception{
@@ -108,16 +108,15 @@ public class Metadatos {
          else {
             ImagenRuta = null;
         }
-
+        /**
+        * Se extraen los distitos metadatos con las funciones get...
+        */ 
         Titulo="Titulo: "+tag.getSongTitle();
         Album="Album: "+tag.getAlbumTitle();
         Artista="Artista: "+tag.getLeadArtist();
         Año="Año: "+tag.getYearReleased();
         Genero="Genero: "+tag.getSongGenre();
-        Duración="Duración: "+duration+"s";
-     /**
-      * Se extraen los distitos metadatos con las funciones get...
-      */   
+        Duración="Duración: "+duration+"s";  
         } catch (IOException ex) {
             Logger.getLogger(Metadatos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TagException ex) {
@@ -136,9 +135,9 @@ public class Metadatos {
     }
     
     /**
-     *
+     * Funcion que obtiene el metadato sobre el artista del archivo
      * @param ruta
-     * @return
+     * @return El artista del archivo
      */
     public String getArtista(String ruta){
         String artista;
@@ -157,9 +156,9 @@ public class Metadatos {
         return null;
     }
     /**
-     * Funcion que extrae por separado el artista del audio
+     * Funcion que extrae por separado el Titulo del audio
      * @param ruta
-     * @return 
+     * @return Titulo del archivo
      */
     public String getTitulo(String ruta){
         String titulo;
@@ -177,9 +176,9 @@ public class Metadatos {
         return null;
     }
     /**
-     * Funcion que extrae por separado el titulo del audio
+     * Funcion que extrae por separado el Genero del audio
      * @param ruta
-     * @return 
+     * @return Genero del archivo
      */
     public String getGenero(String ruta){
         String genero;
@@ -197,9 +196,9 @@ public class Metadatos {
         return null;
     }
     /**
-     * Funcion que extrae por separado el genero del audio
+     * Funcion que extrae por separado el Año de creacion del audio
      * @param ruta
-     * @return 
+     * @return Año de creacion del archivo
      */
     public String getAño(String ruta){
         String Año;
@@ -218,9 +217,9 @@ public class Metadatos {
     }
 
     /**
-     *
+     * Funcion que obtiene el metadato sobre el Album del archivo
      * @param ruta
-     * @return
+     * @return Album del archivo
      */
     public String getAlbum(String ruta){
         String album;
@@ -238,9 +237,9 @@ public class Metadatos {
         return null;
     }
     /**
-     *Funcion que extrae por separado el Album del audio 
+     * Funcion que extrae por separado la duracion del audio 
      * @param ruta
-     * @return 
+     * @return La duracion en segundos del archivo
      */
     public long getSegundos(String ruta){
         try {
@@ -262,7 +261,4 @@ public class Metadatos {
         }
         return 0;
     }
-    /**
-     * Funcion que extrae por separado la duracion del audio
-     */
 }
