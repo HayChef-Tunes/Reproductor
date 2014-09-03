@@ -637,12 +637,23 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             }
         
     }//GEN-LAST:event_previous_songActionPerformed
-
+    /**
+     * Campo de texto de donde los botones artista,titulo, album y genero
+     * sacan la informacion para remplazar por el metadato o para busca en la lista el dato
+     * introducido
+     * @param evt 
+     */
     private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
         
     }//GEN-LAST:event_NombreActionPerformed
-
+    /**
+     * Boton multifuncion de busqueda avanzada por artista y modificacion del metadato artista
+     * @param evt 
+     */
     private void ArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArtistaActionPerformed
+        /**
+        * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
+        */
         if(modificador==0){
             modelo2.clear();
             Metadatos direccion = new Metadatos();
@@ -659,10 +670,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }
-            /**
-             * Funcion que busca dentro de la playlist si hay algun mp3 del Artista introducido
-             */
         }
+        /**
+         * Funcion que cambia el metadato de Artista por el introducido
+         */
         else{
             try {
                 int i = ListaCanciones.getSelectedIndex();
@@ -688,15 +699,21 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-        /**
-         * Funcion que cambia el metadato de Artista por el introducido
-         */
     }//GEN-LAST:event_ArtistaActionPerformed
-
+    /**
+     * Boton multifuncion de busqueda avanzada por titulo y modificacion del metadato titulo
+     * @param evt 
+     */
     private void TituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloActionPerformed
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
+         */
         if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
+        /**
+        * Recorre la lista de reproduccion buscando mp3 con el titulo introducido
+        */
         for(int i=0;i<LISTA.getSize();i++){
             try {
                 String ruta = LISTA.getElemento(i);
@@ -705,18 +722,15 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 if (nombre.equals(nombre_txt)){
                     modelo2.addElement(nombre);
                 }
-                /**
-                 * Recorre la lista de reproduccion buscando mp3 con el titulo introducido
-                 */
             } 
             catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
-        /**
-         * Funcion que busca dentro de la playlist si hay algun mp3 con el titulo introducido
-         */
         }
+        /**
+         * Funcion que cambia el metadato de Titulo por el introducido
+         */
         else{
             try {
                 int i = ListaCanciones.getSelectedIndex();
@@ -742,15 +756,21 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-        /**
-         * Funcion que cambia el metadato de Titulo por el introducido
-         */
     }//GEN-LAST:event_TituloActionPerformed
-
+    /**
+     * Boton multifuncion de busqueda avanzada por album y modificacion del metadato album
+     * @param evt 
+     */
     private void AlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlbumActionPerformed
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
+         */
         if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
+        /**
+        * Recorre toda la lista
+        */
         for(int i=0;i<LISTA.getSize();i++){
             try {
                 String ruta = LISTA.getElemento(i);
@@ -760,17 +780,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 if (album.equals(nombre_txt)){
                     modelo2.addElement(nombre);
                 }
-                /**
-                 * Recorre toda la lista
-                 */
             } catch (Exception ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
-        /**
-         * Funcion que busca dentro de la playlist si hay algun mp3 del album introducido
-         */
         }
+        /**
+         * Funcion que cambia el metadato de Album por el introducido
+         */
         else{
             try {
                 int i = ListaCanciones.getSelectedIndex();
@@ -796,12 +813,15 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-        /**
-         * Funcion que cambia el metadato de Album por el introducido
-         */
     }//GEN-LAST:event_AlbumActionPerformed
-
+    /**
+     * Boton multifuncion de busqueda avanzada por genero y modificacion del metadato genero
+     * @param evt 
+     */
     private void GeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroActionPerformed
+        /**
+         * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
+         */
         if(modificador==0){
         modelo2.clear();
         Metadatos direccion = new Metadatos();
@@ -818,10 +838,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
-        /**
-         * Funcion que busca dentro de la playlist si hay algun mp3 del genero introducido
-         */
         }
+        /**
+         * Funcion que cambia el metadato de Genero por el introducido
+         */
         else{
             try {
                 int i = ListaCanciones.getSelectedIndex();
@@ -847,17 +867,15 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-        /**
-         * Funcion que cambia el metadato de Genero por el introducido
-         */
     }//GEN-LAST:event_GeneroActionPerformed
-
+    /**
+     * Funcion que habilita la funcion de modificacion 
+     * en los botones de artista, tittulo, album y genero
+     * @param evt 
+     */
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         modificador=1;
         modificar_on.setVisible(true);
-        /**
-         * Funcion habilita la modificacion de datos en los botones artista, album, genero y titulo
-         */
     }//GEN-LAST:event_ModificarActionPerformed
 
     /**
