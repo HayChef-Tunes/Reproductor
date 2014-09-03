@@ -1,7 +1,6 @@
 /**
  * Se cargan las librerias necesarias para que todo el código funcione a la perfección
  */
-
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -22,8 +21,8 @@ import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
-/**Clase de Metadatos encargada de sacar los metadatos de los mp3
- * @author max
+/**
+ * Clase de Metadatos encargada de sacar los metadatos de los mp3
  */
 public class Metadatos {
     String nl = System.getProperty("line.separator");//variable utilizada para saltos de linea
@@ -114,8 +113,9 @@ public class Metadatos {
     }
     
     /**
-     * Metodo para adquirir la ruta de la imagen de la caratura del album del mp3, la cual esta almacenada en la variable ImagenRuta
-     * @return
+     * Metodo para adquirir la ruta de la imagen de la caratura del album del mp3, 
+     * la cual esta almacenada en la variable ImagenRuta
+     * @return ImagenRuta (ruta de la imagen creada por el metodo datos)
      */
     public String getRutaImagen(){
         return ImagenRuta;

@@ -1,3 +1,6 @@
+/**
+ * Se importan las librerias utilzadas en la clase
+ */
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -9,26 +12,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Clase Ventana se crea la interfaz del proyecto
- * @author mell
  */
-
 public class Ventana extends javax.swing.JFrame implements Runnable{
-    
-    /**
-     *
-     */
-    public String Ruta;
-    private String cancionsonando = "";
-    private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
-    
+          
     /**
      * Constructor de la clase
+     * Las variables asignadas a clases se inician aqui para poderlas utilizar en todos los metodos
      */
     public Ventana() {
         cancion = new Reproductor();
         informacion = new Metadatos();
         LISTA = new ArrayList();
-        
         initComponents();
         this.setTitle("HayChef-Tunes");
         getContentPane().setBackground(new java.awt.Color(0,0,0));
@@ -36,6 +30,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         modificar_on.setVisible(false);
     }
     
+    /**
+     * Código de la interfaz generado por NetBeans
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -315,10 +312,11 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-/**
- * 
- * @param evt 
- */
+    
+    /**
+     * Metodo para agregar una cancion a la Playlist
+     * @param evt 
+     */
     private void add_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_songActionPerformed
         JFileChooser dig = new JFileChooser();  //Crea un objeto de dialogo JFileChooser
         dig.setFileFilter(filter);
@@ -338,16 +336,21 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             
         }
     }//GEN-LAST:event_add_songActionPerformed
-/**
- * 
- * @param evt 
- */
+    
+    /**
+     * Metodo para reproducir la cancion
+     * Tiene diferentes modalidades cambiadas a travez de un contador
+     * Una reproduce la cancion
+     * Dos pone en pausa la cancion
+     * Tres reanuda la cancion en el momento en que fue detennida
+     * Se extraen los metadatos de la cancion y los agrega a la interfaz
+     * @param evt 
+     */
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
-
     //String direccion = Ruta;
     int i = ListaCanciones.getSelectedIndex();
     String elemento;
-    
+            // Reproducir
             if (modelo.getSize()>0){
                 if (contador ==0){
                     try {
@@ -363,13 +366,13 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         contador=1;
                         segundos = informacion.getSegundos(elemento);
                         progress_bar.setMaximum((int) segundos);
-                        siguiente = new Thread (this);
+                        siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                         siguiente.start();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog (null," Se produjo un error al intentar reproducir el archivo","Error",ERROR_MESSAGE);
                     }
                 }
-
+                //Parar
                 else if (contador ==1){
                     try {
                         cancion.Pausa();
@@ -381,6 +384,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                //Reanudar
                 else {
                     try {
                         cancion.Continuar();
@@ -393,13 +397,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     }
                 }
             }
-            
     }//GEN-LAST:event_playActionPerformed
 
-/**
- * 
- * @param evt 
- */
+    /**
+     * Metodo para pasar a la siguiente canción de la Playlist
+     * Si no hay siguiente cancion volvera a reproducir la misma
+     * Se extraen los metadatos de la cancion y los agrega a la interfaz
+     * @param evt 
+     */
     @SuppressWarnings("empty-statement")
     private void next_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next_songActionPerformed
         /**
@@ -432,7 +437,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
                     progress_bar.setMaximum((int) segundos);
-                    siguiente = new Thread (this);
+                    siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                     siguiente.start();
                     contador =1;
             } catch (Exception ex) {
@@ -458,7 +463,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
                     progress_bar.setMaximum((int) segundos);
-                    siguiente = new Thread (this);
+                    siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                     siguiente.start();
                     contador =1;
             } catch (Exception ex) {
@@ -467,10 +472,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } 
 
     }//GEN-LAST:event_next_songActionPerformed
-/**
- * 
- * @param evt 
- */
+  
+    /**
+     * Funcion que detiene por completo la cancion y el hilo
+     * Pone la progress bar en 0 y el reloj tambien
+     * @param evt 
+     */
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         try {
             cancion.Stop();
@@ -565,7 +572,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_VaciarListaActionPerformed
 
     /**
-     * @author kevin clase previous
+     * Metodo para pasar a la anterior canción de la Playlist
+     * Si no hay anterior cancion se volvera a reproducir la misma
+     * Se extraen los metadatos de la cancion y los agrega a la interfaz
+     * @param evt
      */
     private void previous_songActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previous_songActionPerformed
         // TODO add your handling code here:
@@ -604,7 +614,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                         cancion.Play();
                         segundos = informacion.getSegundos(archivo);
                         progress_bar.setMaximum((int) segundos);
-                        siguiente = new Thread (this);
+                        siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                         siguiente.start();
                         contador =1;
                 } catch (Exception ex) {
@@ -628,7 +638,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
                     progress_bar.setMaximum((int) segundos);
-                    siguiente = new Thread (this);
+                    siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                     siguiente.start();
                     contador =1;
                 } catch (Exception ex) {
@@ -879,7 +889,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_ModificarActionPerformed
 
     /**
-     *
+     * Main de la clase ventana
      * @param args
      */
     public static void main(String args[]) {
@@ -940,43 +950,27 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel reloj;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     *
-     */
-        public String RutaImagen = null;
-
-    /**
-     *
-     */
-    public int contador = 0;
-
-    /**
-     *
-     */
+    public String Ruta;
+    private String cancionsonando = "";
+    public String RutaImagen = null;
     public String nombre_txt;
-
-    /**
-     *
-     */
+    private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
+    public int contador = 0;
+    public int modificador = 0;
     public long segundos;
-
-    /**
-     *
-     */
     public boolean nexo = true;
+    
+    /**
+     * Se declaran las variables de clases
+     */
     Reproductor cancion = null;
     Metadatos informacion = null;
     ArrayList LISTA = null;
     Thread siguiente;
-
-    /**
-     *
-     */
-    public int modificador = 0;
     
     /**
-     *
+     * Metodo que agarra la ruta de la imagen, si existe, y la muestra en la interfaz
+     * Si no esta la ruta significa que el mp3 no tiene imagen y cambia por otra imagen predeterminada
      */
     public void imagenlabel(){
         if (informacion.getRutaImagen()!=null){
@@ -994,7 +988,8 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }
     
     /**
-     *
+     *Esta funcion es identica al boton next, solo que se llama desde otro metodo por eso no recibe el parametro de evt (al hacer clik se activa)
+     * Se extraen los metadatos de la cancion y los agrega a la interfaz 
      */
     public void next(){
         try {
@@ -1018,7 +1013,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
                     progress_bar.setMaximum((int) segundos);
-                    siguiente = new Thread (this);
+                    siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                     siguiente.start();
                     contador =1;
             } catch (Exception ex) {
@@ -1038,7 +1033,7 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     cancion.Play();
                     segundos = informacion.getSegundos(archivo);
                     progress_bar.setMaximum((int) segundos);
-                    siguiente = new Thread (this);
+                    siguiente = new Thread (this); // se crea el hilo para la progress bar y pasar de cancion cuando finalice la que se reproduce actualmente
                     siguiente.start();
                     contador =1;
             } catch (Exception ex) {
@@ -1047,21 +1042,27 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         } 
     }
     
+    /**
+     * Este es el metodo que inicia el hilo al darle star a la variable siguiente de la clase Thread
+     * Funciona con los segundos de la cancion y una variable que se incrementa en uno por cada segundo
+     * Cuando la variable es igual a los segundos totales de la cancion se llama al metodo next para reproducir la siguiente cancion en la PLaylist
+     * Ademas el progress bar y el reloj se incrementan en uno por segundo en el Thread
+     */
     public void run (){
         try {
             int segundero = 0;
             while(true){
                 while(nexo){
-                progress_bar.setValue(segundero);
-                reloj.setText(prog(segundero, (int) segundos));
-                Thread.sleep(1000);
-                segundero++;
-                if (segundero == segundos){
-                    progress_bar.setValue(0);
-                    next();
-                    siguiente.destroy();
+                    progress_bar.setValue(segundero);
+                    reloj.setText(prog(segundero, (int) segundos));
+                    Thread.sleep(1000);
+                    segundero++;
+                    if (segundero == segundos){
+                        progress_bar.setValue(0);
+                        next();
+                        siguiente.destroy();
+                    }
                 }
-            }
             }
         } catch (InterruptedException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -1069,10 +1070,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     }
     
     /**
-     *
-     * @param act
-     * @param total
-     * @return
+     * Metodo que retorna los segundos actuales mpas el tiempo total de la cancion
+     * @param act segundos actuales
+     * @param total total de segundos de la cancion
+     * @return String con los segundos actuales y los muestra en un label
      */
     public String prog(int act, int total){
         int mins=0;
@@ -1112,13 +1113,12 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
         else {
             return String.valueOf(mins) + ":" + String.valueOf(segs) + "/" + total(total);
         }
-
     }
     
     /**
-     *
-     * @param t
-     * @return
+     * Metodo que cambia los segundos totales a minutos
+     * @param t tiempo en segundos totales de la cancion
+     * @return String del tiempo de duracion de la cancion
      */
     public String total(int t){
 
@@ -1181,7 +1181,5 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
             tot="7:"+String.valueOf(t);}
         }
         return tot;
-
     }
-    
 }

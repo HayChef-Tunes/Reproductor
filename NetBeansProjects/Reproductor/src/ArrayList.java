@@ -1,13 +1,12 @@
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
-    /**
-     * @author kevin clase de ArrayList
-     */
+/**
+ * Clase ArrayLit para gestionar la lista de reproduccion
+ */
 class ArrayList {
     /**
      * Declaracion de variables a utilizar
-     * @author kevin clasede ArrayList
      */
 	private int size;
         
