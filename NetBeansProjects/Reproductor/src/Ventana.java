@@ -957,6 +957,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
     private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo MP3","mp3");
     public int contador = 0;
     public int modificador = 0;
+    public int mins = 0;
+    public int segs;
+    public int tiempo = 1;
     public long segundos;
     public boolean nexo = true;
     
@@ -1058,6 +1061,9 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
                     Thread.sleep(1000);
                     segundero++;
                     if (segundero == segundos){
+                        mins = 0;
+                        segs = 0;
+                        tiempo = 1;
                         progress_bar.setValue(0);
                         next();
                         siguiente.destroy();
@@ -1076,37 +1082,14 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
      * @return String con los segundos actuales y los muestra en un label
      */
     public String prog(int act, int total){
-        int mins=0;
-        int segs=act;
-        if(act>59 && act<=119){
-            mins=1;
-            segs=segs-60;
+        segs = act;
+        if (act == (60 * tiempo)){
+            segs = segs -(60 * tiempo++);
+            mins ++;
         }
-        if(act>119 && act<=179){
-            mins=2;
-            segs=segs-120;
+        else{
+            segs = segs -(60 * mins);
         }
-        if(act>179 && act<=239){
-            mins=3;
-            segs=segs-180;
-        }
-        if(act>239 && act<=299){
-            mins=4;
-            segs=segs-240;
-        }
-        if(act>299 && act<=359){
-            mins=5;
-            segs=segs-300;
-        }
-        if(act>359 && act<=419){
-            mins=6;
-            segs=segs-360;
-        }
-        if(act>419 && act<=479){
-            mins=7;
-            segs=segs-420;
-        }
-
         if(segs<10){
             return String.valueOf(mins) + ":0" + String.valueOf(segs) + "/" + total(total);
         }
@@ -1121,65 +1104,10 @@ public class Ventana extends javax.swing.JFrame implements Runnable{
      * @return String del tiempo de duracion de la cancion
      */
     public String total(int t){
-
-        String tot="0:00";
-        if(t<10){
-            tot="0:0"+String.valueOf(t);
-        }
-
-        if(t<59){
-            tot="0:"+String.valueOf(t);
-        }
-
-        if(t>59 && t<=119){
-            t=t-60;
-            if(t<10){
-            tot="1:0"+String.valueOf(t);}
-            else{
-            tot="1:"+String.valueOf(t);}
-        }
-        if(t>119 && t<=179){
-            t=t-120;
-            if(t<10){
-            tot="2:0"+String.valueOf(t);}
-            else{
-            tot="2:"+String.valueOf(t);}
-        }
-        if(t>179 && t<=239){
-            t=t-180;
-            if(t<10){
-            tot="3:0"+String.valueOf(t);}
-            else{
-            tot="3:"+String.valueOf(t);}
-        }
-        if(t>239 && t<=299){
-            t=t-240;
-            if(t<10){
-            tot="4:0"+String.valueOf(t);}
-            else{
-            tot="4:"+String.valueOf(t);}
-        }
-        if(t>299 && t<=359){
-            t=t-300;
-            if(t<10){
-            tot="5:0"+String.valueOf(t);}
-            else{
-            tot="5:"+String.valueOf(t);}
-        }
-        if(t>359 && t<=419){
-            t=t-360;
-            if(t<10){
-            tot="6:0"+String.valueOf(t);}
-            else{
-            tot="6:"+String.valueOf(t);}
-        }
-        if(t>419 && t<=479){
-            t=t-420;
-            if(t<10){
-            tot="7:0"+String.valueOf(t);}
-            else{
-            tot="7:"+String.valueOf(t);}
-        }
+        int min,s; 
+        min = t / 60;  
+        s= t -(min * 60);
+        String tot = min +":"+ s;
         return tot;
     }
 }
